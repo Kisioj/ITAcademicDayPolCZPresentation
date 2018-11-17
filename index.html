@@ -20,11 +20,18 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<style>
+			.reveal section img { background:none; border:none; box-shadow:none; }
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
+				<section data-background-transition="slide" data-background="IntroWallpaper.jpg">
+					<h2>C# + Gothic + ANTLR4 - tworzymy kompilator! </h2><br/><br/><br/>
+					<span style="font-style: italic">Artur Kasperek, Krzysztof Jura</span><br/>
+					<img width="300px" data-src="LogoDK.png">
+				</section>
 				<section>Slide 2</section>
 			</div>
 		</div>
