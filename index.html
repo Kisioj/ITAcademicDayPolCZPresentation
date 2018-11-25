@@ -31,8 +31,104 @@
 					<h2>C# + Gothic + ANTLR4 - tworzymy kompilator! </h2><br/><br/><br/>
 					<span style="font-style: italic">Artur Kasperek, Krzysztof Jura</span><br/>
 					<img width="300px" data-src="LogoDK.png">
+
+					<aside class="notes">
+						Krótko o nas, o tym czym się zajmujemy i o Dziejach Khorinis.
+						Mówimy o tym że grupa powstała w 2008 a dopiero od ponad roku
+						ma taki kształ jak teraz. W grupie pracujemy nad kompilerorem, nad narzędziem
+						do buildowania moda, nad edytorem świata
+					</aside>
 				</section>
-				<section>Slide 2</section>
+				<section>
+					<div>Daedalus - a co to ?</div></br>
+					<img src="wtf.gif">
+					<aside class="notes">
+						Pytamy się ludzi czy ktoś wie co to daedalus, jakby ktoś wiedział to może
+						jakaś nagroda ;) ?
+					</aside>
+				</section>
+				<section>
+					Daedalus - język skrytpowy Gothic I oraz Gothic II
+
+					<aside class="notes">
+						Mówimy że Daedalus jest skryptowym językiem
+						dzięki któremu można zaprogramować gameplay gry.
+						Możemy nim zaprogramować zachowanie NPCów( rutyny ),
+						zachowanie gdy zagadamy NPCa.
+						Mówimy że dzięki skryptom w D komuniukujemy się z silnkiem gry,
+						w D istnieją internale do silnika, np AI_output które sterują zachowaniem
+						silnika. Typowa architektura jak dla gier koło 2000 roku, Quake 3 podobnie działa ( C QUAKE )
+					</aside>
+				</section>
+				<section>
+					Przykład
+					<pre><code data-trim data-noescape>
+func void DIA_Bolec_IWantToGo_Drink ()
+{
+
+	if (Npc_HasItems (other, ItFo_Booze) >= 1)
+	{
+		B_GiveInvItems (other, self, ItFo_Booze, 1);
+		B_UseItem (self, ItFo_Booze);
+	}
+	else if	(Npc_HasItems (other, ItFo_Beer) >= 1)
+	{
+		B_GiveInvItems (other, self, ItFo_Beer, 1);
+		B_UseItem (self, ItFo_Beer);
+	};
+};
+	</code></pre>
+
+					<aside class="notes">
+						Mówimy że Daedalus jest podobny do C.
+						Posiada funkcje, IFy, zmienne lokalne, zmienne globalne,
+						możemy tworzyć ala klasy które są ograniczone,
+						możemy tworzyć prototypy oraz instancje które działają podobnie do konstruktorów.
+					</aside>
+				</section>
+				<section>
+					Ograniczenia - czyli dlaczego zdecydowaliśmy się napisać kompilator ?
+					<aside class="notes">
+						Przewijamy dalej
+					</aside>
+				</section>
+				<section>
+					1. <br/>
+					Kompilator jest wbudowany do pliku wykonywalnego gry ( Gothic2.exe )
+					<aside class="notes">
+						Skrypter nie może szybko przekompilować rzeczy bez odpalania gry, musi przewinąć intro
+						Nie możemy przez to łatwo postawić stagingu który by testował automatycznie czy
+						skrypty są kompilowanlne w naszym pipeline
+					</aside>
+				</section>
+				<section>
+					2. <br/>
+					Daedalus jest ubogi
+					<aside class="notes">
+						Nie ma np pętli for
+						TODO
+					</aside>
+				</section>
+				<section>
+					3. <br/>
+					Integracja z narzędziem do budowania moda
+					<aside class="notes">
+						Kompilator będzie dopełnieniem narzędzia do budowania gry ( robocza nazwa gothic mod composer ).
+						Dzięki temu nawet niedoświadczony skrypter będzie mógł w prosty sposób zacząć zabawę z modowaniem
+						gothica
+					</aside>
+				</section>
+				<section>
+					4. <br/>
+					Fajnie jest napisać kompilator !!
+					<aside class="notes">
+						Fajnie jest napisać w swojej karierze kompilator. Dzięki takiemu doświadczeniu
+						stajesz się bardziej kompletnym programistą ;)
+					</aside>
+				</section>
+				<section>
+					Co to właściwie jest kompilator? TODO
+				</section>
 			</div>
 		</div>
 
