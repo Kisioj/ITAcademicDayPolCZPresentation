@@ -1,0 +1,161 @@
+/*
+    background-image: url("images/background.png");
+    background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-attachment: fixed;
+*/
+
+#hero-artwork
+{
+    overflow: hidden;
+    z-index: -1;
+}
+
+#hero-artwork,
+#hero-artwork > *
+{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#hero-artwork > .background
+{
+    background-image: url("../background.jpg");
+/*
+    background-color: hsla(0, 0%, 50%, 1);
+    background-blend-mode: hard-light;
+    animation: color-fluctuate 30s linear 1s infinite;
+*/
+}
+
+@keyframes color-fluctuate 
+{
+	0%   { background-color: hsla(0, 0%, 50%, 1); }
+	10%  { background-color: hsla(0, 0%, 40%, 1); }
+	12%  { background-color: hsla(0, 0%, 60%, 1); }
+	15%  { background-color: hsla(0, 0%, 30%, 1); }
+	60%  { background-color: hsla(0, 0%, 60%, 1); }
+	90%  { background-color: hsla(0, 0%, 30%, 1); }
+	92%  { background-color: hsla(0, 0%, 60%, 1); }
+	95%  { background-color: hsla(0, 0%, 30%, 1); }
+	100% { background-color: hsla(0, 0%, 50%, 1); }
+}
+
+
+#hero-artwork > .smoke
+{
+    background-image: url("../smoke.png");
+    background-size: auto 100%;
+    opacity: 0.2;
+    background-position: 0vh 0;
+    background-repeat: repeat-x;
+    animation: smoke-scroll 60s linear 1s infinite;
+}
+
+@keyframes smoke-scroll 
+{
+	0%   { background-position: 0vh 0; }
+	100% { background-position: 95vh 0; }
+}
+
+
+#hero-artwork > .first-plane
+{
+    background-image: url("../first-plane.png");
+}
+
+/*
+body:after
+{
+    content: '';
+    z-index: 998;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-image-source: url(../border.png);
+    border-image-width: 3em;
+    border-width: 0.2em;
+    border-image-slice: 60;
+    border-image-outset: initial;
+    border-image-repeat: repeat;
+    border-style: solid;
+    box-shadow: 
+        0 0 1em black inset,
+        0 0 3em black inset;
+}
+*/
+
+img#logo
+{
+	position: absolute;
+	max-height: 100px;
+	
+}
+
+body
+{
+    color: white;
+    font-size: 2.0vh;
+    letter-spacing: 0.1em;
+    
+    margin: 0;
+}
+
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+	margin: 0 0 20px 0;
+	color: #fff;
+	font-family: 'Lusitana', serif;
+	text-shadow: 
+		0.0em 0.1em 0.1em black,
+		0.1em 0.2em 0.5em black,
+		0.1em 0.2em 0.5em black;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.1em;
+	text-transform: none;
+	word-wrap: break-word;
+  
+}
+  
+.reveal p,
+.reveal li {
+	color: #fff;
+	font-family: 'Lusitana', serif;
+	text-shadow: 
+		0.0em 0.1em 0.1em black,
+		0.1em 0.2em 0.5em black,
+		0.1em 0.2em 0.5em black;
+	letter-spacing: 0.1em;
+	text-transform: none;
+	font-size: 0.8em;
+}
+
+.reveal ol, .reveal dl, .reveal ul {
+	display: block;
+}
+
+.reveal section img {
+    margin: 0;
+    background: 0;
+    border: 0;
+    box-shadow: none;
+}
+

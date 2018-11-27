@@ -11,6 +11,9 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<!-- From dziejekhorinis.org -->
+		<link rel="stylesheet" href="css/hero-artwork.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -25,12 +28,17 @@
 		</style>
 	</head>
 	<body>
+		<div id="hero-artwork">
+			<div class="background"></div>
+			<div class="smoke"></div>
+			<div class="first-plane"></div>
+		</div>
+		<img src="logo-horizontal.png" id="logo" alt="Gothic II Dzieje Khorinis">
+		
 		<div class="reveal">
-			<div class="slides">
-				<section data-background-transition="slide" data-background="IntroWallpaper.jpg">
-					<h2>C# + Gothic + ANTLR4 - tworzymy kompilator! </h2><br/><br/><br/>
-					<span style="font-style: italic">Artur Kasperek, Krzysztof Jura</span><br/>
-					<img class="clear" width="300px" data-src="LogoDK.png">
+			<div class="slides">	
+				<section data-background-transition="slide">
+					<h3>C# + Gothic + ANTLR4 -<br/>we're making the compiler!</h3><br/><br/>
 
 					<aside class="notes">
 						Krótko o nas, o tym czym się zajmujemy i o Dziejach Khorinis.
@@ -39,15 +47,147 @@
 						do buildowania moda, nad edytorem świata
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				
+				<section data-transition="zoom">
+					<h2 style="text-align:left">About us</h2><br>
+
+					<h4 class="fragment fade-in" style="text-align:left">Artur Kasperek</h4>
+					
+					<div class="sl-block" data-block-type="text">
+						<div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; line-height: 1.95;" data-has-line-height="">
+							<ul>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">Dzieje Khorinis programmers coordinator</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">JS Fullstack Freelance developer</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">Computer Science student</li>
+							</ul>
+						</div>
+					</div>
+					
+				</section>
+				
+				
+				<section data-transition="zoom">
+					<h2 style="text-align:left">About us</h2><br>
+
+					<h4 class="fragment fade-in" style="text-align:left">Krzysztof Jura &lt;<a href="kisioj@gmail.com" target="_top">kisioj@gmail.com</a>&gt;</h4>
+					
+					<div class="sl-block" data-block-type="text">
+						<div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; line-height: 1.95;" data-has-line-height="">
+							<ul>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">Software developer</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">Programming teacher (C, C++, Python)</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">PyCzest  founder (<a href="https://fb.com/pyczest" target="_top">fb.com/pyczest</a>)</li>
+							</ul>
+						</div>
+					</div>
+					
+				</section>
+				
+				<section data-transition="slide">
+					<img src="logo-horizontal.png" class="logo" style="max-height: 250px;">
+					<img src="dkscreen.jpg" style="max-height: 300px;">
+				</section>
+
+				
+				<section data-transition="slide">
+					<h3>Daedalus</h3><br>
+					<img class="fragment fade-in" src="wtfmeme.png" style="max-height: 300px;">
+				</section>
+				
+				
+				<section data-background-transition="slide">
+					<pre><code data-trim data-noescape>
+instance PC_Thief_DI(Npc_Default)
+{
+  name[0] = "Diego";
+  guild = GIL_NONE;
+  npcType = NPCTYPE_FRIEND;
+  aivar[AIV_ToughGuy] = TRUE;
+  B_SetAttributesToChapter(self,6);
+  fight_tactic = FAI_HUMAN_MASTER;
+  EquipItem(self,ItMw_1h_Sld_Sword);
+  daily_routine = Rtn_Start_31;
+  ...
+};
+	</code></pre>
+
+					<aside class="notes">
+						Mówimy że Daedalus jest podobny do C.
+						Posiada funkcje, IFy, zmienne lokalne, zmienne globalne,
+						możemy tworzyć ala klasy które są ograniczone,
+						możemy tworzyć prototypy oraz instancje które działają podobnie do konstruktorów.
+					</aside>
+				</section>
+				
+				
+				
+				<section data-background-transition="slide">
+					<pre><code data-trim data-noescape style="overflow: hidden;">
+func void DIA_MIL_6_STANDARD_Info()
+{
+  AI_Output(other,self,"DIA_MIL_6_STANDARD_15_00");  //Co słychać?
+  if(Kapitel == 1)
+  {
+    AI_Output(self,other,"DIA_MIL_06_01"); //W mieście coraz więcej szumowin.
+    AI_Output(self,other,"DIA_MIL_06_02"); //Wszędzie coraz więcej złodziei. Lord Andre podejrzewa nawet, że całe to zamieszanie jest sprawką gangu.
+    AI_Output(self,other,"DIA_MIL_06_03"); //Niedawno przetrząsnęliśmy dokładnie całą dzielnicę portową, ale niczego nie znaleźliśmy.
+  }
+  else if(Kapitel == 2)
+  {
+    AI_Output(self,other,"DIA_MIL_06_04"); //Wygląda na to, że problem bandytów mamy już z głowy. Ataki stały się ostatnimi czasy rzadkością.
+  };
+};
+	</code></pre>
+
+					<aside class="notes">
+						Mówimy że Daedalus jest podobny do C.
+						Posiada funkcje, IFy, zmienne lokalne, zmienne globalne,
+						możemy tworzyć ala klasy które są ograniczone,
+						możemy tworzyć prototypy oraz instancje które działają podobnie do konstruktorów.
+					</aside>
+				</section>
+				
+				
+				
+
+				
+				<section data-transition="zoom">
+					<h3>About us</h3><br/><br/>
+
+					<h5>Dupa</h5>
+					<aside class="notes">
+						Krótko o nas, o tym czym się zajmujemy i o Dziejach Khorinis.
+						Mówimy o tym że grupa powstała w 2008 a dopiero od ponad roku
+						ma taki kształ jak teraz. W grupie pracujemy nad kompilerorem, nad narzędziem
+						do buildowania moda, nad edytorem świata
+					</aside>
+				</section>
+				
+				<section data-transition="zoom">
+					<h3>About us</h3><br/><br/>
+
+					<h5>Kupa</h5>
+					<aside class="notes">
+						Krótko o nas, o tym czym się zajmujemy i o Dziejach Khorinis.
+						Mówimy o tym że grupa powstała w 2008 a dopiero od ponad roku
+						ma taki kształ jak teraz. W grupie pracujemy nad kompilerorem, nad narzędziem
+						do buildowania moda, nad edytorem świata
+					</aside>
+				</section>
+				
+				
+				<section data-background-transition="slide">
 					<div>Daedalus - a co to ?</div></br>
-					<img src="wtf.gif">
+					
+					
+					
+					<img src="wtfmeme.jpg">
 					<aside class="notes">
 						Pytamy się ludzi czy ktoś wie co to daedalus, jakby ktoś wiedział to może
 						jakaś nagroda ;) ?
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					Daedalus - język skrytpowy Gothic I oraz Gothic II
 
 					<aside class="notes">
@@ -60,7 +200,7 @@
 						silnika. Typowa architektura jak dla gier koło 2000 roku, Quake 3 podobnie działa ( C QUAKE )
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					Przykład
 					<pre><code data-trim data-noescape>
 func void DIA_Bolec_IWantToGo_Drink ()
@@ -86,13 +226,13 @@ func void DIA_Bolec_IWantToGo_Drink ()
 						możemy tworzyć prototypy oraz instancje które działają podobnie do konstruktorów.
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					Ograniczenia - czyli dlaczego zdecydowaliśmy się napisać kompilator ?
 					<aside class="notes">
 						Przewijamy dalej
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					1. <br/>
 					Kompilator jest wbudowany do pliku wykonywalnego gry ( Gothic2.exe )
 					<aside class="notes">
@@ -101,7 +241,7 @@ func void DIA_Bolec_IWantToGo_Drink ()
 						skrypty są kompilowanlne w naszym pipeline
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					2. <br/>
 					Daedalus jest ubogi
 					<aside class="notes">
@@ -109,7 +249,7 @@ func void DIA_Bolec_IWantToGo_Drink ()
 						TODO
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					3. <br/>
 					Integracja z narzędziem do budowania moda
 					<aside class="notes">
@@ -118,7 +258,7 @@ func void DIA_Bolec_IWantToGo_Drink ()
 						gothica
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					4. <br/>
 					Fajnie jest napisać kompilator !!
 					<aside class="notes">
@@ -126,9 +266,29 @@ func void DIA_Bolec_IWantToGo_Drink ()
 						stajesz się bardziej kompletnym programistą ;)
 					</aside>
 				</section>
-				<section data-background-transition="slide" data-background="dk-standard-bkg.jpg">
+				<section data-background-transition="slide">
 					Co to właściwie jest kompilator? TODO
 				</section>
+				
+				
+				<section>
+					<p class="fragment fade-up">Dzieje Khorinis programmers coordinator</p>
+					<p class="fragment fade-up">JS Fullstack Freelance developer</p>
+					<p class="fragment fade-up">Computer Science student</p>
+				
+				
+					<p class="fragment grow">grow</p>
+					<p class="fragment shrink">shrink</p>
+					<p class="fragment fade-out">fade-out</p>
+					<p class="fragment fade-up">fade-up (also down, left and right!)</p>
+					<p class="fragment fade-in-then-out">fades in, then out when we move to the next step</p>
+					<p class="fragment fade-in-then-semi-out">fades in, then obfuscate when we move to the next step</p>
+					<p class="fragment highlight-current-blue">blue only once</p>
+					<p class="fragment highlight-red">highlight-red</p>
+					<p class="fragment highlight-green">highlight-green</p>
+					<p class="fragment highlight-blue">highlight-blue</p>
+				</section>
+				
 			</div>
 		</div>
 
