@@ -42,10 +42,11 @@
 						<h3>C# + Gothic + ANTLR4 -<br/>we're making the compiler!</h3><br/><br/>
 
 						<aside class="notes">
-							Krótko o nas, o tym czym się zajmujemy i o Dziejach Khorinis.
-							Mówimy o tym że grupa powstała w 2008 a dopiero od ponad roku
-							ma taki kształ jak teraz. W grupie pracujemy nad kompilerorem, nad narzędziem
-							do buildowania moda, nad edytorem świata
+							KJ: Cześć wszystkim, przyjechaliśmy dzisiaj do was z tematem C# + Gothic + ANTLR4, czyli tworzymy kompilator.
+							Opowiemy wam dzisiaj o projekcie kompilatora, nad którym pracujemy po godzinach. Mamy nadzieje, że
+							temat was zainteresuje, może nawet na tyle, że będziecie chcieli dołączyć do projektu i dołożyć do niego swoją cegiełkę.
+							Zanim zaczniemy temat kompilatora, to opowiemy krótko o sobie i o projekcie Dzieje Khorinis.
+							Zaczynajmy.
 						</aside>
 					</section>
 					
@@ -63,7 +64,9 @@
 								</ul>
 							</div>
 						</div>
-						
+						<aside class="notes">
+							AK:
+						</aside>
 					</section>
 					
 					
@@ -81,12 +84,37 @@
 								</ul>
 							</div>
 						</div>
+						<aside class="notes">
+							KJ: Ja nazywam się Krzysztof Jura, przyjechałem do was z Częstochowy, z Parkitki, czyli miałem dość niedaleko.
+
+							Jeżeli chodzi o mnie to ja, programuję od 2007 roku, zaczynałem hobbistycznie od pisania sieciowych gier komputerowych 2D, a od ponad 5 lat pracuję w zawodzie, jako programista.
+							Głównie zajmuję się tworzeniem aplikacji internetowych, zarówno po stronie backendu, który piszę w Pythonie, jak i po stronie frontendu, który oczywiście piszę w JavaScripcie.
+							W ogóle, bardzo możliwe, że jakaś część z was korzysta na codzień z jakiś systemów nad którymi w przeszłości pracowałem, np. z systemu bankowego banku PKO BP.
+							
+							Oprócz tego, że programuję to od lat dorywczo zajmuję się nauczaniem programowania, zarówno prywanie jak i w szkołach programowania.
+
+							Jestem też założycielem fanpage'a Częstochowskiej Społeczności Użytkowników języka Python. Obecnie na tym fanpage'u nic się nie dzieje, ale mamy w planach organizacje spotkań programistów Pythona, a w najbliższej przyszłości będziemy organizowali darmowe warsztaty z programowania w języku Python. Warsztaty będą dla każdego niezależnie od płci, wieku, rasy, wyznania, orientacji seksualnej czy poglądów politycznych, więc każdego zainteresowanego zapraszam do polubienia fanpage'a i oczekiwania na dalsze informacje.
 						
+							I to by było na tyle jeżeli chodzi o nas prywatnie, natomiast chciałbym jeszcze opowiedzieć o projekcie w którym oboje z Arturem bierzmy udział.
+						</aside>
 					</section>
 					
 					<section data-transition="slide">
 						<img src="logo-horizontal.png" class="logo" style="max-height: 250px;">
 						<img src="dkscreen.jpg" style="max-height: 300px;">
+						
+						<aside class="notes">
+							KJ: Projekt ten nazywa się Gothic II Dzieje Khorinis. Bardzo możliwe, że już słyszeliście tą nazwę bo jest o nas dość głośno.
+							Tak w skrócie: robimy moda do kultowej gry o nazwie Gothic II. W naszym zespole mamy kilkadziesiąt osób, w tym m.in. programistów, scenarzystów, grafików, animatorów i pewnie jeszcze kilka innych typów osób. Natomiast nadal szukamy ludzi, więc jeżeli ktoś jest chętny nas wesprzeć to możemy pogadać o tym po tej prezentacji. Warto dodać, że projekt jest non profit, to znaczy nie dostajemy żadnych pieniędzy za pracę; po prostu pracujemy bo chcemy zrobić coś fajnego.
+							
+							Jeżeli chodzi o historię projektu to pomysł na zrobienie moda powstał w 2008 roku, ale dopiero pod koniec roku 2015 rozpoczęły się nad nim prace.
+							Natomiast zgromadzenie zespołu w takim kształcie w jakim mniej więcej teraz jest to w zasadzie kwestia ostatniego roku.
+							
+							Z takich ciekawostek to: do naszego moda głosów udzielają profesjonalni aktorzy głosowi, w tym również Ci, którzy podkładali głos postaciom z oryginalnej wersji gry.
+							
+							Oprócz samego moda, w naszym zespole pracujemy również nad narzędziami związanymi z modowaniem Gothica. Głównym językiem, który wykorzystujemy w tych narzędziach jest C#, a o samych narzędziach opowie wam Artur.
+							
+						</aside>
 					</section>
 				</section>
 				
@@ -101,7 +129,14 @@
 							</ul>
 						</div>
 					</div><br>
+					
+					<aside class="notes">
+							AK: TODO
+					</aside>
 				</section>
+				
+				
+				
 				
 				<section class="stack">
 					<section data-transition="slide">
@@ -177,8 +212,12 @@ func void DIA_MIL_6_STANDARD_Info()
 					
 					
 					<section data-transition="slide">
-						<h3>New Daedalus compiler</h3><br>
+						<h3>Daedalus Compiler</h3><br>
 						<img class="fragment fade-in" src="butwhy.gif" style="height: 300px; width: 550px; object-fit: cover;">
+						
+						<aside class="notes">
+							No dobra, wiemy czym jest język Daedalus, ale pytanie brzmi: dlaczego chcemy stworzyć nowy kompilator języka Daedalus?
+						</aside>
 					</section>
 					
 					
@@ -195,9 +234,24 @@ func void DIA_MIL_6_STANDARD_Info()
 								</ul>
 							</div>
 						</div>
+						
+						<aside class="notes">
+							TODO
+							Otóż powodów jest kilka, należy zacząć od tego, że Daedalus ssie pałke: ...
+							...
+							A chcielibyśmy żeby nie ssał i dlatego
+							
+						</aside>
 					</section>
 				</section>
 
+				<section data-transition="slide">
+					<h3>Compiler</h3>
+					<p>A compiler is computer software that transforms computer code written in one programming language (the source language) into another programming language (the target language).</p>
+				</section>
+			
+				<!-- A compiler is computer software that transforms computer code written in one programming language (the source language) into another programming language (the target language). -->
+				
 				
 				<section data-transition="zoom">
 					<h3>About us</h3><br/><br/>
