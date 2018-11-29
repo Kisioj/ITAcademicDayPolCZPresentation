@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>C# + Gothic + ANTLR4</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -131,7 +131,13 @@
 					</div><br>
 					
 					<aside class="notes">
-							AK: TODO
+							AK: Narzędzi, które tworzymy jest dość dużo, natomiast takie główne 3 narzędzia to przede wszystkim:
+							
+							- Edytor Światów, który ma w założeniu być dużo bardziej rozbudowanym i dopracowanym edytorem niż ten dołączony do Gothica. Ten Gothicowy wiecznie się zawiesza, chodzi bardzo topornie i częśc społeczności generalnie klnie na niego.
+							
+							- Kolejnym naszym projektem jest narzędzie do budowania paczki z modem, które zbiera do kupy cały kod projektu, mapy, modele i inne rzeczy i buduje z nich paczkę o oczekiwanym przez Gothica formacie.
+							
+							- No i ostatnim narzędziem jest Kompilator języka Daedalus, o którym dzisiaj wam troszkę więcej opowiemy.		
 					</aside>
 				</section>
 				
@@ -142,6 +148,10 @@
 					<section data-transition="slide">
 						<h3>Daedalus</h3><br>
 						<img class="fragment fade-in" src="wtfmeme.png" style="max-height: 300px;">
+						
+						<aside class="notes">
+							Pytanie do publiczności: czy ktoś z was w ogóle słyszał o takim języku jak Daedalus?
+						</aside>
 					</section>
 					
 					<section data-transition="slide">
@@ -155,6 +165,20 @@
 								</ul>
 							</div>
 						</div><br>
+						
+						<aside class="notes">
+							Daedalus którego nazwa pochodzi od mitycznego Dedala to po prostu język skryptowy gier Gothic I i Gothic II, czyli język w którym pisze się mody do tych gier.
+							
+							Jego składnia została zainspirowana składnią języka C co widać już na 1 rzut oka.
+							
+							A kod tego języka jest kompilowany do kodu bajtowego, wykonywanego w trakcie gry przez maszynę wirtualną zawartą w grze Gothic.
+							
+							<!--
+							Mówimy że dzięki skryptom w D komuniukujemy się z silnkiem gry,
+							w D istnieją internale do silnika, np AI_output które sterują zachowaniem
+							silnika. Typowa architektura jak dla gier koło 2000 roku, Quake 3 podobnie działa ( C QUAKE )
+								-->
+						</aside>
 					</section>
 
 					
@@ -175,10 +199,9 @@ instance PC_Thief_DI(Npc_Default)
 		</code></pre>
 
 						<aside class="notes">
-							Mówimy że Daedalus jest podobny do C.
-							Posiada funkcje, IFy, zmienne lokalne, zmienne globalne,
-							możemy tworzyć ala klasy które są ograniczone,
-							możemy tworzyć prototypy oraz instancje które działają podobnie do konstruktorów.
+							Tutaj widzicie przykładowy kod w języku Daedalus. Jest to kod definiujący instancję NPCta, którego później w trakcie gry będziemy mogli spotkać na mapie.
+							
+							Ustalamy tutaj imie tego NPCta, jego model 3D, zachowanie, statystyki i inne parametry.
 						</aside>
 					</section>
 					
@@ -203,10 +226,7 @@ func void DIA_MIL_6_STANDARD_Info()
 		</code></pre>
 
 						<aside class="notes">
-							Mówimy że Daedalus jest podobny do C.
-							Posiada funkcje, IFy, zmienne lokalne, zmienne globalne,
-							możemy tworzyć ala klasy które są ograniczone,
-							możemy tworzyć prototypy oraz instancje które działają podobnie do konstruktorów.
+							Kolejny przykład kodu przedstawia funkcję dialogową zawierającą kwestie wypowiadane przez naszą postać oznaczoną przez self oraz przez postać z którą rozmawiamy oznaczoną przez other.
 						</aside>
 					</section>
 					
@@ -216,10 +236,28 @@ func void DIA_MIL_6_STANDARD_Info()
 						<img class="fragment fade-in" src="butwhy.gif" style="height: 300px; width: 550px; object-fit: cover;">
 						
 						<aside class="notes">
-							No dobra, wiemy czym jest język Daedalus, ale pytanie brzmi: dlaczego chcemy stworzyć nowy kompilator języka Daedalus?
+							No dobra, wiemy czym jest język Daedalus, ale pytanie brzmi: dlaczego w ogóle chcieliśmy stworzyć nowy kompilator tego języka?
+							
+							Powodów jest kilka.
+							
+							<!-- Skrypter nie może szybko przekompilować rzeczy bez odpalania gry, musi przewinąć intro
+							Nie możemy przez to łatwo postawić stagingu który by testował automatycznie czy
+							skrypty są kompilowanlne w naszym pipeline -->
+							
+							<!-- Kompilator będzie dopełnieniem narzędzia do budowania gry ( robocza nazwa gothic mod composer ).
+							Dzięki temu nawet niedoświadczony skrypter będzie mógł w prosty sposób zacząć zabawę z modowaniem
+							gothica -->
+							
+							Jednym z głównych powodów jest to, że oryginalny kompilator jest wbudowany w grę Gothic i żeby skompilować skrypty trzeba tą grę najpierw uruchomić - co jest dość niefajne,
+							bo po pierwsze trzeba mieć zainstalowanego Gothica, a po drugie, po prostu gorzej się z takiego kompilatora korzysta - no bo trzeba za każdym razem czekać na uruchomienie gry, a potem wyjść z gry.
+							
+							Kolejna sprawa to jest to, że błędy wyświetlane przez oryginalny kompilator są często dość niejasne i enigmatyczne i w naszym kompilatorze chcielibyśmy to zrobić lepiej.
+							
+							No a poza tym sam język Daedalus w wersji dla oryginalnego kompilatora jest językiem dość mocno ograniczonym, więc mamy pomysł aby nasz kompilator potrafił obsługiwać bardziej rozbudowaną wersję tego języka, ale zachowując kompatybilność wsteczną , to znaczy, że oryginalny kod w języku Daedalus również działałby u nas bez problemu.
 						</aside>
 					</section>
 					
+
 					
 					<section data-transition="slide">
 						<h3 style="text-align:left">Daedalus flaws</h3>
@@ -230,17 +268,27 @@ func void DIA_MIL_6_STANDARD_Info()
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">has classes but no methods</li>
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">requires ; after }</li>
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">constants can be modified</li>
-									<li class="fragment fade-in-then-semi-out" style="text-align:left">compiled by Gothic.exe</li>
 								</ul>
 							</div>
 						</div>
 						
 						<aside class="notes">
-							TODO
-							Otóż powodów jest kilka, należy zacząć od tego, że Daedalus ssie pałke: ...
-							...
-							A chcielibyśmy żeby nie ssał i dlatego
+							Jakie są te ograniczenia języka Daedauls, których chcielibyśmy się pozbyć w naszej wersji języka?
 							
+							Jest ich generalnie bardzo dużo, a kilka takich pierwszych z brzegu, które od razu przychodzą na myśl to np. to, że:
+							
+							- w języku Daedalus nie ma pętli, ani for, ani while, ani foreach, ani żadnej innej, natomiast w naszej wersji języka chcemy je dodać
+							
+							- kolejne ograniczenie to to, że w Daedalusie istnieją klasy, natomiast nie mogą posiadać one metod, więc są de facto tylko stukturami danych i chcielibyśmy to zmienić
+
+							- Kolejna sprawa to to, że oryginalny kompilator wymaga umieszczania średników po zamykających nawiasach wąsatych, co może być dość wkurzające dla programistów innych języków nieprzyzwyczajonych do takich rzeczy.
+							
+							- również dziwną rzeczą jest to, że stałe można w języku Daedalus modyfikować, a od zmiennych różnią się one tym, że nie są zapisywane w save'ach. My raczej nie będziemy chcieli dawać programistom możliwości zmiany wartości stałych.
+
+							
+							Genealnie tych ograniczń języka Daedalus jest dużo dużo więcej, więc naprawdę możemy ten język bardzo ulepszyć i mam nadzieję, że nam się to uda.
+							
+							No dobra, wróćmy do głównego tematu: czyli do tematu tworzenia kompilatora. Ale najpierw zadam pytanie: czy każdy z was wie czym dokładnie jest kompilator? Pewnie nie każdy.
 						</aside>
 					</section>
 				</section>
@@ -248,137 +296,121 @@ func void DIA_MIL_6_STANDARD_Info()
 				<section data-transition="slide">
 					<h3>Compiler</h3>
 					<p>A compiler is computer software that transforms computer code written in one programming language (the source language) into another programming language (the target language).</p>
-				</section>
-			
-				<!-- A compiler is computer software that transforms computer code written in one programming language (the source language) into another programming language (the target language). -->
-				
-				
-				<section data-transition="zoom">
-					<h3>About us</h3><br/><br/>
-
-					<h5>Dupa</h5>
+					
 					<aside class="notes">
-						Krótko o nas, o tym czym się zajmujemy i o Dziejach Khorinis.
-						Mówimy o tym że grupa powstała w 2008 a dopiero od ponad roku
-						ma taki kształ jak teraz. W grupie pracujemy nad kompilerorem, nad narzędziem
-						do buildowania moda, nad edytorem świata
-					</aside>
-				</section>
-				
-				<section data-transition="zoom">
-					<h3>About us</h3><br/><br/>
+						A więc pozwólcie, że przedstawie wam definicje z angielskiej wikipedii, która mówi, że kompilator to jest program, który zamienia kod napisany w jednym języku programowania na kod w innym języku programowania.
+						
+						Zazwyczaj jednak jak mówimy o kompilatorze  to mamy na myśli coś w stylu kompilatora np. języka C, czyli chodzi nam o program, który zamienia kod źródłowy na kod maszynowy, czyli instrukcje zrozumiałe dla procesora naszego komputera,
 
-					<h5>Kupa</h5>
-					<aside class="notes">
-						Krótko o nas, o tym czym się zajmujemy i o Dziejach Khorinis.
-						Mówimy o tym że grupa powstała w 2008 a dopiero od ponad roku
-						ma taki kształ jak teraz. W grupie pracujemy nad kompilerorem, nad narzędziem
-						do buildowania moda, nad edytorem świata
+						albo często też chodzi nam o program, który zamienia kod źródłowy na kod bajtowy, który potem jest wykonywany przez maszynę wirtualną i tak jest np. w przypadku np. Javy albo właśnie języka Daedalus.
 					</aside>
 				</section>
 				
 				
-				<section data-background-transition="slide">
-					<div>Daedalus - a co to ?</div></br>
+
+				
+				
+				
+				<section data-transition="slide">
+					<h3>How does the compiler work?</h3>
 					
 					
+					<aside class="notes">
+						No dobra, ale jak kompilator działa pod spodem? Otóż należy zacząć od tego, że kompilator to taki program, który jak sama nazwa wskazuje, potrafi wykonać proces kompilacji jakiegoś kodu źródłowego. 
+						Proces ten składa się z kilku głównych kroków. Kroków tych może być więcej, lub mniej, w zależności od kompilatora, natomiast przykładowe kroki, które wykorzystujemy w naszym kompilatorze są następujące:
+					</aside>
+				</section>
+				
+				<!--
+				
+				<section data-transition="slide">
+					<h3>Compilation steps</h3>
+					<div class="sl-block" data-block-type="text">
+						<div class="sl-block-content" style="z-index: 12; line-height: 1.95;">
+							<ul>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">preprocessing</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">lexical analysis</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">parsing</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">semantic analysis</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">intermediate form generation</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">optimization</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">code generation</li>
+							</ul>
+						</div>
+					</div>
 					
-					<img src="wtfmeme.jpg">
 					<aside class="notes">
-						Pytamy się ludzi czy ktoś wie co to daedalus, jakby ktoś wiedział to może
-						jakaś nagroda ;) ?
+	
 					</aside>
 				</section>
-				<section data-background-transition="slide">
-					Daedalus - język skrytpowy Gothic I oraz Gothic II
-
+				-->
+				
+				<!-- - Pierwszym krokiem jest tkz. preprocessing, czyli przetworzenie kodu źródłowego za pomocą dyrektyw preprocesora. Jeżeli ktoś z was pisał kod w C albo w C++ to chodzi o komendy zaczynające się od hashtaga, np. define albo include. W naszym kompilatorze póki co tego kroku nie ma i najprawdopodobniej nie będzie. -->
+				
+				<section data-transition="slide">
+					<div class="sl-block" data-block-type="text">
+						<div class="sl-block-content" style="z-index: 12; line-height: 1.95;">
+							<ol>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">lexical analysis</li>
+								<p class="fragment fade-in-then-disappear" onshow="alert('hehe')">boo</p>
+								
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">parsing</li>
+								<p class="fragment fade-in-then-disappear">boo</p>
+								
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">semantic analysis</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">code generation</li>
+							</ol>
+							<br><br><br>
+						</div>
+					</div>
+					
 					<aside class="notes">
-						Mówimy że Daedalus jest skryptowym językiem
-						dzięki któremu można zaprogramować gameplay gry.
-						Możemy nim zaprogramować zachowanie NPCów( rutyny ),
-						zachowanie gdy zagadamy NPCa.
-						Mówimy że dzięki skryptom w D komuniukujemy się z silnkiem gry,
-						w D istnieją internale do silnika, np AI_output które sterują zachowaniem
-						silnika. Typowa architektura jak dla gier koło 2000 roku, Quake 3 podobnie działa ( C QUAKE )
+	
 					</aside>
 				</section>
-				<section data-background-transition="slide">
-					Przykład
-					<pre><code data-trim data-noescape>
-func void DIA_Bolec_IWantToGo_Drink ()
-{
-
-	if (Npc_HasItems (other, ItFo_Booze) >= 1)
-	{
-		B_GiveInvItems (other, self, ItFo_Booze, 1);
-		B_UseItem (self, ItFo_Booze);
-	}
-	else if	(Npc_HasItems (other, ItFo_Beer) >= 1)
-	{
-		B_GiveInvItems (other, self, ItFo_Beer, 1);
-		B_UseItem (self, ItFo_Beer);
-	};
-};
-	</code></pre>
-
+				
+				<!--
+				<section data-transition="slide">
+					<h3>1. Lexical analysis</h3>
+					
+					
 					<aside class="notes">
-						Mówimy że Daedalus jest podobny do C.
-						Posiada funkcje, IFy, zmienne lokalne, zmienne globalne,
-						możemy tworzyć ala klasy które są ograniczone,
-						możemy tworzyć prototypy oraz instancje które działają podobnie do konstruktorów.
+						Pierwszym krokiem jest analiza leksykalna
 					</aside>
 				</section>
-				<section data-background-transition="slide">
-					Ograniczenia - czyli dlaczego zdecydowaliśmy się napisać kompilator ?
+				
+				<section data-transition="slide">
+					<h3>2. Parsing</h3>
+					
+					
 					<aside class="notes">
-						Przewijamy dalej
+						Kolejnym krokiem jest analiza składniowa (inaczej parsowanie)
 					</aside>
 				</section>
-				<section data-background-transition="slide">
-					1. <br/>
-					Kompilator jest wbudowany do pliku wykonywalnego gry ( Gothic2.exe )
+				
+				
+				<section data-transition="slide">
+					<h3>3. Semantic analysis</h3>
+					
+					
 					<aside class="notes">
-						Skrypter nie może szybko przekompilować rzeczy bez odpalania gry, musi przewinąć intro
-						Nie możemy przez to łatwo postawić stagingu który by testował automatycznie czy
-						skrypty są kompilowanlne w naszym pipeline
+						Kolejnym krokiem jest analiza semantyczna
 					</aside>
 				</section>
-				<section data-background-transition="slide">
-					2. <br/>
-					Daedalus jest ubogi
+				
+				<section data-transition="slide">
+					<h3>4. Code generation</h3>
+					
+					
 					<aside class="notes">
-						Nie ma np pętli for
-						TODO
+						Ostatnim krokiem jest wygenerowanie kodu, w naszym przypadku to będzie kod bajtowy dla maszyny wirtualnej Gothica.
 					</aside>
 				</section>
-				<section data-background-transition="slide">
-					3. <br/>
-					Integracja z narzędziem do budowania moda
-					<aside class="notes">
-						Kompilator będzie dopełnieniem narzędzia do budowania gry ( robocza nazwa gothic mod composer ).
-						Dzięki temu nawet niedoświadczony skrypter będzie mógł w prosty sposób zacząć zabawę z modowaniem
-						gothica
-					</aside>
-				</section>
-				<section data-background-transition="slide">
-					4. <br/>
-					Fajnie jest napisać kompilator !!
-					<aside class="notes">
-						Fajnie jest napisać w swojej karierze kompilator. Dzięki takiemu doświadczeniu
-						stajesz się bardziej kompletnym programistą ;)
-					</aside>
-				</section>
-				<section data-background-transition="slide">
-					Co to właściwie jest kompilator? TODO
-				</section>
+				-->
+				
 				
 				
 				<section>
-					<p class="fragment fade-up">Dzieje Khorinis programmers coordinator</p>
-					<p class="fragment fade-up">JS Fullstack Freelance developer</p>
-					<p class="fragment fade-up">Computer Science student</p>
-				
-				
 					<p class="fragment grow">grow</p>
 					<p class="fragment shrink">shrink</p>
 					<p class="fragment fade-out">fade-out</p>

@@ -159,3 +159,52 @@ body
     box-shadow: none;
 }
 
+
+.reveal .slides section .fragment.fade-in-then-disappear
+{
+	opacity: 0;
+	visibility: hidden;
+	display: none;
+}
+
+.reveal .slides section .fragment.fade-in-then-disappear.current-fragment
+ {
+	opacity: 1;
+	visibility: inherit;
+	/*display: list-item;*/
+	display: block;
+}
+
+/*
+.reveal .slides section .fragment+.fade-in-then-disappear
+{
+	opacity: 0;
+	visibility: hidden;
+	display: none;
+}
+
+.reveal .slides section .fragment.current-fragment+.fade-in-then-disappear
+ {
+	opacity: 1;
+	visibility: inherit;
+	display: list-item;
+	display: block;
+}
+*/
+
+
+	
+/*
+
+
+.reveal .slides section .fragment.fade-in-then-full-out {
+  opacity: 0;
+  visibility: hidden; }
+  .reveal .slides section .fragment.fade-in-then-full-out.visible {
+    opacity: 0.5;
+    visibility: inherit; }
+  .reveal .slides section .fragment.fade-in-then-full-out.current-fragment {
+    opacity: 1;
+    visibility: inherit; }
+
+*/
