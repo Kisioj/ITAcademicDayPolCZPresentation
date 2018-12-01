@@ -293,136 +293,181 @@ func void DIA_MIL_6_STANDARD_Info()
 					</section>
 				</section>
 
-				<section data-transition="slide">
-					<h3>Compiler</h3>
-					<p>A compiler is computer software that transforms computer code written in one programming language (the source language) into another programming language (the target language).</p>
-					
-					<aside class="notes">
-						A więc pozwólcie, że przedstawie wam definicje z angielskiej wikipedii, która mówi, że kompilator to jest program, który zamienia kod napisany w jednym języku programowania na kod w innym języku programowania.
+				<section class="stack">
+					<section data-transition="slide">
+						<h3>Compiler</h3>
+						<p class="fragment fade-in">A compiler is computer software that transforms computer code written in one programming language (the source language) into another programming language (the target language).</p>
 						
-						Zazwyczaj jednak jak mówimy o kompilatorze  to mamy na myśli coś w stylu kompilatora np. języka C, czyli chodzi nam o program, który zamienia kod źródłowy na kod maszynowy, czyli instrukcje zrozumiałe dla procesora naszego komputera,
+						<aside class="notes">
+							A więc pozwólcie, że przedstawie wam definicje z angielskiej wikipedii, która mówi, że kompilator to jest program, który zamienia kod napisany w jednym języku programowania na kod w innym języku programowania.
+							
+							Zazwyczaj jednak jak mówimy o kompilatorze  to mamy na myśli coś w stylu kompilatora np. języka C, czyli chodzi nam o program, który zamienia kod źródłowy na kod maszynowy, czyli instrukcje zrozumiałe dla procesora naszego komputera,
 
-						albo często też chodzi nam o program, który zamienia kod źródłowy na kod bajtowy, który potem jest wykonywany przez maszynę wirtualną i tak jest np. w przypadku np. Javy albo właśnie języka Daedalus.
-					</aside>
-				</section>
-				
-				
+							albo często też chodzi nam o program, który zamienia kod źródłowy na kod bajtowy, który potem jest wykonywany przez maszynę wirtualną i tak jest np. w przypadku np. Javy albo właśnie języka Daedalus.
+						</aside>
+					</section>
+					
+					
 
-				
-				
-				
-				<section data-transition="slide">
-					<h3>How does the compiler work?</h3>
 					
 					
-					<aside class="notes">
-						No dobra, ale jak kompilator działa pod spodem? Otóż należy zacząć od tego, że kompilator to taki program, który jak sama nazwa wskazuje, potrafi wykonać proces kompilacji jakiegoś kodu źródłowego. 
-						Proces ten składa się z kilku głównych kroków. Kroków tych może być więcej, lub mniej, w zależności od kompilatora, natomiast przykładowe kroki, które wykorzystujemy w naszym kompilatorze są następujące:
-					</aside>
-				</section>
-				
-				<!--
-				
-				<section data-transition="slide">
-					<h3>Compilation steps</h3>
-					<div class="sl-block" data-block-type="text">
-						<div class="sl-block-content" style="z-index: 12; line-height: 1.95;">
-							<ul>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">preprocessing</li>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">lexical analysis</li>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">parsing</li>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">semantic analysis</li>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">intermediate form generation</li>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">optimization</li>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">code generation</li>
-							</ul>
+					
+					<section data-transition="slide">
+						<h3>How does the compiler work?</h3>
+						
+						<aside class="notes">
+							No dobra, ale jak kompilator działa pod spodem? Otóż należy zacząć od tego, że kompilator to taki program, który jak sama nazwa wskazuje, potrafi wykonać proces kompilacji jakiegoś kodu źródłowego - czyli ten proces zamiany kodu źródłowego na kod zrozumiały przez procesor lub maszynę wirtualna.
+							
+							Proces kompilacji składa się z kilku głównych kroków. Kroków tych może być więcej, lub mniej, w zależności od kompilatora, natomiast podstawowe kroki, które wykorzystujemy w naszym kompilatorze są następujące:
+						</aside>
+					</section>
+					
+					
+					<section data-transition="slide">
+						<h3>Compilation</h3>
+						<div class="fragment fade-in">
+							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">1. lexical analysis</p>
+							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">2. parsing</p>
+							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">3. semantic analysis</p>
+							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">4. bytecode generation</p>
+						</div><br>
+
+						<aside class="notes">
+		
+						</aside>
+					</section>
+					
+					<!--
+					
+					<section data-transition="slide">
+						<h3>Compilation steps</h3>
+						<div class="sl-block" data-block-type="text">
+							<div class="sl-block-content" style="z-index: 12; line-height: 1.95;">
+								<ul>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">preprocessing</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">lexical analysis</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">parsing</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">semantic analysis</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">intermediate form generation</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">optimization</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">code generation</li>
+								</ul>
+							</div>
 						</div>
-					</div>
+						
+						<aside class="notes">
+		
+						</aside>
+					</section>
+					-->
 					
-					<aside class="notes">
-	
-					</aside>
+					<!-- - Pierwszym krokiem jest tkz. preprocessing, czyli przetworzenie kodu źródłowego za pomocą dyrektyw preprocesora. Jeżeli ktoś z was pisał kod w C albo w C++ to chodzi o komendy zaczynające się od hashtaga, np. define albo include. W naszym kompilatorze póki co tego kroku nie ma i najprawdopodobniej nie będzie. -->
+					
+					<section data-transition="slide">
+						<h3>1. Lexical analysis</h3>
+						<pre><code data-trim data-noescape style="overflow: hidden;">
+x = 3;
+if (x >= 5) {
+  Print("You win!");
+} else {
+  Print("You lose");
+};
+			</code></pre>
+			<pre><code data-trim data-noescape style="overflow: hidden;">
+[@0,0:0='x',&lt;IDENTIFIER&gt;,1:0]
+[@1,2:2='=',&lt;'='&gt;,1:2]
+[@2,4:4='3',&lt;INTEGER_LITERAL&gt;,1:4]
+[@3,5:5=';',&lt;';'&gt;,1:5]
+[@4,8:9='if',&lt;'if'&gt;,2:0]
+[@5,11:11='(',&lt;'('&gt;,2:3]
+[@6,12:12='x',&lt;IDENTIFIER&gt;,2:4]
+[@7,14:15='&gt;=',&lt;'&gt;='&gt;,2:6]
+[@8,17:17='5',&lt;INTEGER_LITERAL&gt;,2:9]
+[@9,18:18=')',&lt;')'&gt;,2:10]
+[@10,20:20='{',&lt;'{'&gt;,2:12]
+[@11,24:28='Print',&lt;IDENTIFIER&gt;,3:1]
+[@12,29:29='(',&lt;'('&gt;,3:6]
+[@13,30:39='"You win!"',&lt;STRING_LITERAL&gt;,3:7]
+[@14,40:40=')',&lt;')'&gt;,3:17]
+[@15,41:41=';',&lt;';'&gt;,3:18]
+[@16,44:44='}',&lt;'}'&gt;,4:0]
+[@17,46:49='else',&lt;'else'&gt;,4:2]
+[@18,51:51='{',&lt;'{'&gt;,4:7]
+[@19,55:59='Print',&lt;IDENTIFIER&gt;,5:1]
+[@20,60:60='(',&lt;'('&gt;,5:6]
+[@21,61:70='"You lose"',&lt;STRING_LITERAL&gt;,5:7]
+[@22,71:71=')',&lt;')'&gt;,5:17]
+[@23,72:72=';',&lt;';'&gt;,5:18]
+[@24,75:75='}',&lt;'}'&gt;,6:0]
+[@25,76:76=';',&lt;';'&gt;,6:1]
+[@26,79:78='&lt;EOF&gt;',&lt;EOF&gt;,7:0]
+			</code></pre>
+						
+						<aside class="notes">
+							Pierwszym krokiem jest analiza leksykalna
+						</aside>
+					</section>
+					
+					<section data-transition="slide">
+						<h3>2. Parsing</h3>
+						
+						
+						<aside class="notes">
+							Kolejnym krokiem jest analiza składniowa (inaczej parsowanie)
+						</aside>
+					</section>
+					
+					
+					<section data-transition="slide">
+						<h3>3. Semantic analysis</h3>
+						
+						
+						<aside class="notes">
+							Kolejnym krokiem jest analiza semantyczna
+						</aside>
+					</section>
+					
+					<section data-transition="slide">
+						<h3>4. Code generation</h3>
+						
+						
+						<aside class="notes">
+							Ostatnim krokiem jest wygenerowanie kodu, w naszym przypadku to będzie kod bajtowy dla maszyny wirtualnej Gothica.
+						</aside>
+					</section>
 				</section>
-				-->
 				
-				<!-- - Pierwszym krokiem jest tkz. preprocessing, czyli przetworzenie kodu źródłowego za pomocą dyrektyw preprocesora. Jeżeli ktoś z was pisał kod w C albo w C++ to chodzi o komendy zaczynające się od hashtaga, np. define albo include. W naszym kompilatorze póki co tego kroku nie ma i najprawdopodobniej nie będzie. -->
-				
-				<section data-transition="slide">
-					<div class="sl-block" data-block-type="text">
-						<div class="sl-block-content" style="z-index: 12; line-height: 1.95;">
-							<ol>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">lexical analysis</li>
-								<p class="fragment fade-in-then-disappear" onshow="alert('hehe')">boo</p>
-								
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">parsing</li>
-								<p class="fragment fade-in-then-disappear">boo</p>
-								
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">semantic analysis</li>
-								<li class="fragment fade-in-then-semi-out" style="text-align:left">code generation</li>
-							</ol>
-							<br><br><br>
-						</div>
-					</div>
+				<section class="stack">
+					<section>
+						<h3>Daedalus Compiler progress</h3>
+					</section>
 					
-					<aside class="notes">
-	
-					</aside>
+					<section>
+						<h3>What we already have</h3>
+					</section>
+					
+					<section>
+						<h3>What we aim to have</h3>
+					</section>
+					
+					<section>
+						<h3>Problems we had</h3>
+					</section>
+					
+					<section>
+						<h3>Daedalus features we discovered</h3>
+					</section>
+					
+
 				</section>
-				
-				<!--
-				<section data-transition="slide">
-					<h3>1. Lexical analysis</h3>
-					
-					
-					<aside class="notes">
-						Pierwszym krokiem jest analiza leksykalna
-					</aside>
-				</section>
-				
-				<section data-transition="slide">
-					<h3>2. Parsing</h3>
-					
-					
-					<aside class="notes">
-						Kolejnym krokiem jest analiza składniowa (inaczej parsowanie)
-					</aside>
-				</section>
-				
-				
-				<section data-transition="slide">
-					<h3>3. Semantic analysis</h3>
-					
-					
-					<aside class="notes">
-						Kolejnym krokiem jest analiza semantyczna
-					</aside>
-				</section>
-				
-				<section data-transition="slide">
-					<h3>4. Code generation</h3>
-					
-					
-					<aside class="notes">
-						Ostatnim krokiem jest wygenerowanie kodu, w naszym przypadku to będzie kod bajtowy dla maszyny wirtualnej Gothica.
-					</aside>
-				</section>
-				-->
-				
-				
 				
 				<section>
-					<p class="fragment grow">grow</p>
-					<p class="fragment shrink">shrink</p>
-					<p class="fragment fade-out">fade-out</p>
-					<p class="fragment fade-up">fade-up (also down, left and right!)</p>
-					<p class="fragment fade-in-then-out">fades in, then out when we move to the next step</p>
-					<p class="fragment fade-in-then-semi-out">fades in, then obfuscate when we move to the next step</p>
-					<p class="fragment highlight-current-blue">blue only once</p>
-					<p class="fragment highlight-red">highlight-red</p>
-					<p class="fragment highlight-green">highlight-green</p>
-					<p class="fragment highlight-blue">highlight-blue</p>
+					<h3>We need C# programmers</h3>
 				</section>
 				
+				<section>
+					<h3>Thank you and Bye</h3>
+				</section>
 			</div>
 		</div>
 

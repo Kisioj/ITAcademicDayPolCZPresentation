@@ -175,25 +175,51 @@ body
 	display: block;
 }
 
-/*
+
 .reveal .slides section .fragment+.fade-in-then-disappear
 {
 	opacity: 0;
 	visibility: hidden;
-	display: none;
+	max-height: 0;
+	-webkit-transition: all .2s ease;
+	transition: all .2s ease;
 }
+
 
 .reveal .slides section .fragment.current-fragment+.fade-in-then-disappear
  {
 	opacity: 1;
 	visibility: inherit;
-	display: list-item;
-	display: block;
+	max-height: unset;
+}
+
+/*
+
+#box{
+  margin: 15px 0;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  cursor: pointer;
+  background: #ccc;
+  border: solid 3px #ccc;
+  -webkit-transition: all .3s linear 0s;
+  transition: all .3s linear 0s;
+}
+
+#box.on {
+  background: #f43059;
 }
 */
 
 
-	
+/*
+.fragment.fade-in-then-semi-out ~ .fragment.fade-in-then-disappear.current-fragment
+ {
+	color:black;
+}
+*/
+
 /*
 
 
