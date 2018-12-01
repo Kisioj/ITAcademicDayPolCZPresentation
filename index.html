@@ -441,7 +441,19 @@ if (x >= 5) {
 					<section>
 						<h3>Daedalus Compiler progress</h3>
 					</section>
-					
+					<section>
+						<h3>Do we write tests ?</h3> <br/>
+						<img width="500" src="testMeme.jpg"><br/>
+						<h3 class="fragment fade-in">Yes !</h3>
+					</section>
+					<section>
+						<h3>We have unit tests</h3>
+						<img class="fragment fade-in" src="unitTest.png">
+					</section>
+					<section>
+						<h3>We use CircleCI to run tests</h3>
+						<img src="circleci.png">
+					</section>
 					<section>
 						<h3>What we already have</h3>
 					</section>
@@ -486,6 +498,10 @@ if (x >= 5) {
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+
+			setTimeout(() => {
+              Reveal.navigateTo(4)
+			}, 500);
 		</script>
 	</body>
 </html>
