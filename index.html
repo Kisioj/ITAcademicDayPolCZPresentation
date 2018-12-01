@@ -444,25 +444,99 @@ if (x >= 5) {
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Load SRC file</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Compile Daedalus code and generate DAT file</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Detect errors with default ANTLR error strategy</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate CSL files ( Gothic Engine Dialog file )</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate readable assembler (WIP)</li>
 						</ul>
 					</section>
 					<section>
-						<h3>GIF Demo</h3>
-						TODO dodać tu gifa
+						<h3>Demo</h3>
+						<img class="fragment fade-in-then-semi-out" src="demo.gif">
+					</section>
+					<section style="font-size: 80%">
+						<h3>Some interesting problems during development</h3>
+						<li class="fragment fade-in-then-semi-out" style="text-align:left">
+							Problem with encoding ( Gothic Script were written originally written in windows 1250 encoding  )
+						</li>
+						<li class="fragment fade-in-then-semi-out" style="text-align:left">
+							Problem with INSTANCE_HELP symbol name ( in byte code it's prefixed with fixed char, value of that char is 255  )
+							<br/><br/><img width="400" src="instanceHelpProblem.png">
+						</li>
+						<li class="fragment fade-in-then-semi-out" style="text-align:left">
+							Problem with slow compilation speed ( changing List to Dictionary resolved problem  )
+						</li>
+						<li class="fragment fade-in-then-semi-out" style="text-align:left">
+							dotNet Directory.GetFiles method by default works differently on different OS
+						</li>
 					</section>
 					<section>
+						<h3>Things about Daedalus discovered during compiler development</h3>
+						<li class="fragment fade-in-then-semi-out" style="text-align:left">
+							Operation on floats are limited
+						</li>
+						<li class="fragment fade-in-then-semi-out" style="text-align:left">
+							Statement of IF block does't have to be surrounded with brackets, ex:
+							<pre><code data-trim data-noescape>
+if 5 < 2 {
+};
+							</code></pre>
+						</li>
+						<li class="fragment fade-in-then-semi-out" style="text-align:left">
+							Gothic Compiler support expression without assigment
+							<pre><code data-trim data-noescape>
+if ( a > b ) {
+  b;
+};
+							</code></pre>
+						</li>
+					</section>
+					<section>
+						<h3>What we plan to add ?</h3>
+						<ul>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								Better error handling
+								<ul>
+									<li>Lexical errors</li>
+									<li>Semantic errors</li>
+								</ul>
+							</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								Add booleans ( software support )
+							</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								Add loops (for, while, foreach)
+							</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								Possibility to define methods in classes
+							</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								Better importing system
+							</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								Add translation string ( feature needed for translation tool )
+							</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								Add operations on float ( software support )
+							</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">
+								And ... features suggested by You, community and all Daedalus users ;)
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section class="stack">
+					<section style="font-size: 90%">
 						<h3>Do we write tests ?</h3> <br/>
 						<img class="fragment fade-in" width="500" src="testMeme.jpg"><br/>
 						<h3 class="fragment fade-in">Just kidding!</h3>
-						<h3 class="fragment fade-in">Yes, we write !</h3>
+						<h3 class="fragment fade-in">Yes, we do!</h3>
+						<h3 class="fragment fade-in">And their helped us!!</h3>
 					</section>
 					<section>
-						<h3>We have unit tests</h3>
-						<img class="fragment fade-in" src="unitTest.png">
+						<h3>We write unit tests</h3>
+						<img width="800" class="fragment fade-in" src="unitTest.png">
 					</section>
 					<section>
-						<h3>We have e2e tests</h3>
+						<h3>We write e2e tests</h3>
 						<img src="e2eTest.png">
 					</section>
 					<section>
@@ -477,23 +551,6 @@ if (x >= 5) {
 							<img width="600" src="OS.png">
 						</div>
 					</section>
-					<section>
-						<h3>What we already have</h3>
-					</section>
-					
-					<section>
-						<h3>What we aim to have</h3>
-					</section>
-					
-					<section>
-						<h3>Problems we had</h3>
-					</section>
-					
-					<section>
-						<h3>Daedalus features we discovered</h3>
-					</section>
-
-
 				</section>
 				
 				<section>
@@ -521,7 +578,7 @@ if (x >= 5) {
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-
+			//
 			// setTimeout(() => {
             //   Reveal.navigateTo(4)
 			// }, 500);
