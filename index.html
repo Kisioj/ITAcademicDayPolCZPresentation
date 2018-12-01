@@ -59,13 +59,20 @@
 							<div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; line-height: 1.95;" data-has-line-height="">
 								<ul>
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">Dzieje Khorinis programmers coordinator</li>
-									<li class="fragment fade-in-then-semi-out" style="text-align:left">JS Fullstack Freelance developer</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">JS, TS Fullstack Freelance developer</li>
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">Computer Science student</li>
 								</ul>
 							</div>
 						</div>
 						<aside class="notes">
-							AK:
+							AK: Mam na imię Artur Kasperek, pochodzę z Zawiercia. Na co dzień mieszkam w Gliwicach, w akademiku, jestem studentem Polsl.
+							Pracuje w IT od ponad 3 lat, pod koniec gimnazjum zainteresowałem się programowaniem w c++, potem poszedłem na studia
+							informatyczne, po pierwszym semestrze zacząłem pracować, zaczynałem jako stażysta robiąc frontend w angularze1.
+							Następnie zaczął się zajmować także backendem i tak stałem się fullstackiem. Ostatnie miesiące spędzam
+							na projekcie którego celeme jest dostarczenie softwaru dla agentów nieruchomiści ze stanów.
+
+							Staram się brać udział w róźnych meetupach programistycznych, nie tylko jako słuchacz by cały czas się
+							doskonalić
 						</aside>
 					</section>
 					
@@ -125,6 +132,7 @@
 							<ul>
 								<li class="fragment fade-in-then-semi-out" style="text-align:left">3D World Editor</li>
 								<li class="fragment fade-in-then-semi-out" style="text-align:left">Mod Package Builder</li>
+								<li class="fragment fade-in-then-semi-out" style="text-align:left">Translation Tool</li>
 								<li class="fragment fade-in-then-semi-out" style="text-align:left">Daedalus Compiler</li>
 							</ul>
 						</div>
@@ -134,10 +142,12 @@
 							AK: Narzędzi, które tworzymy jest dość dużo, natomiast takie główne 3 narzędzia to przede wszystkim:
 							
 							- Edytor Światów, który ma w założeniu być dużo bardziej rozbudowanym i dopracowanym edytorem niż ten dołączony do Gothica. Ten Gothicowy wiecznie się zawiesza, chodzi bardzo topornie i częśc społeczności generalnie klnie na niego.
-							
+
 							- Kolejnym naszym projektem jest narzędzie do budowania paczki z modem, które zbiera do kupy cały kod projektu, mapy, modele i inne rzeczy i buduje z nich paczkę o oczekiwanym przez Gothica formacie.
-							
-							- No i ostatnim narzędziem jest Kompilator języka Daedalus, o którym dzisiaj wam troszkę więcej opowiemy.		
+
+							- Pracujemy także nad narzędziem które pozwoli w łatwiejszy sposób dodać lokalizacje językowe, obecnie by dodać nową wersję językową tłumacz musi grzebać bezpośrednio w skryptach i np podmieniać literały, co grozi bugami w danej wersji językowe
+
+							- No i ostatnim narzędziem jest Kompilator języka Daedalus, o którym dzisiaj wam troszkę więcej opowiemy.
 					</aside>
 				</section>
 				
@@ -162,6 +172,7 @@
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">Gothic I and II scripting language</li>
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">has C-like syntax</li>
 									<li class="fragment fade-in-then-semi-out" style="text-align:left">compiled to Daedalus bytecode</li>
+									<li class="fragment fade-in-then-semi-out" style="text-align:left">have externals which call engine functions directly</li>
 								</ul>
 							</div>
 						</div><br>
@@ -172,6 +183,8 @@
 							Jego składnia została zainspirowana składnią języka C co widać już na 1 rzut oka.
 							
 							A kod tego języka jest kompilowany do kodu bajtowego, wykonywanego w trakcie gry przez maszynę wirtualną zawartą w grze Gothic.
+
+							Za pomocą externali jest możliwe wywołanie różnych funkcji które są zaimplementowane na poziomie silnika, np logi
 							
 							<!--
 							Mówimy że dzięki skryptom w D komuniukujemy się z silnkiem gry,
@@ -447,10 +460,36 @@ if (x >= 5) {
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate CSL files ( Gothic Engine Dialog file )</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate readable assembler (WIP)</li>
 						</ul>
+
+						<aside class="notes">
+							Nad kompilatorem pracujemy już około 9 miesięcy, przez ten czas udało nam się już trochę osiągnąć.
+
+							Udało nam się z suksecem załadować pełne skrypty Gothica II i wygenerować plik DAT który jest taki sam jak plik tworzony przez oryginalny kompilator. Dodatkowo nasz kompilator jest szybszy od oryginalnego.
+
+							Dzięki antlr'owi mamy zaimplementowane wykrywanie błędów leksykalnych i semantycznych. Pracujemy nad ulepszeniem wykrywanie błędów semantycznych, ponieważ nie wszystkie da się wyłapać podczas procesu parsowania
+
+							Generujemy pliki CSL. Są one tworzone na podstawie komenatrzy które są w kodzie. WIem że to dość dziwaczne trzymać w komentarzach dialogi ale było to wymyślane w 1999.
+
+							Gdy dodamy odpowednią flagę zamiast pliku DAT generujemy pośredni assembler, który jest w pełni czytelny przez człowieka, ten feature wymaga dopracowania.
+
+						</aside>
 					</section>
 					<section>
 						<h3>Demo</h3>
 						<img class="fragment fade-in-then-semi-out" src="demo.gif">
+
+						<aside class="notes">
+							Teraz czas na demo :). Dla pewności zrobiłem nagranie terminala w postaci GIFa. Zobaczmy co na nim jest
+
+							Na początku tworzymy plik Gothic.src, plik ten zawiera inforamcji o lokalizacji naszych wszystkich źródeł.
+							Następnie dodajemy plik z Daedalusem, dodajemy w nim testową funkcję, robimy operacje na lokalnej zmiennej
+
+							Dalej kompilujemy plik src kompilatorem, kompilator mówi nam o braku średnika
+
+							Poprawiamy to, kompilujemy jeszcze raz, tym razem kompilator kompiluje z sukcesem i generuje folder output
+
+							W nim znadjuje się plik DAT, plik DAT jest plikiem binarnym z kodem maszynowym.
+						</aside>
 					</section>
 					<section style="font-size: 80%">
 						<h3>Some interesting problems during development</h3>
@@ -467,6 +506,28 @@ if (x >= 5) {
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
 							dotNet Directory.GetFiles method by default works differently on different OS
 						</li>
+
+						<aside class="notes">
+							Podczas developmentu napotkaliśmy kilka ciekawych problemów.
+
+							Odkryliśmy, że skrypty gothica nie są kodowane w utf8, a w windows 1250. Pod koniec lat 90 utf8 nie było jeszcze
+							tak popularne. Na szczęście w netcore w prosty sposób można wczytać stringa w kodowaniu 1250, tak samo w prosty sposób
+							można przekonwertować spowrotem stringa do 1250
+
+							Napotkaliśmy na problem z nazwą zmiennej w wynikowym pliku DAT. Mianowicie po kompilacji zmienna ta dostawała nowy znak do nazwy.
+							Nasz kompilator czegoś takiego nie robił, skąd wyszły niezgodności między naszym DATem, a DATem oryginlnaego kompilatora,
+							prostym IFem naprawiliśmy problem, na szczęście to jedyny taki przypadek z dodawaniem prefixów przez kompilator
+
+							W pierwszych wersjach nasz kompilator strasznie powoli działał, okazało się że problem jest podczas przeszukiwania
+							listy z symbolami, zamiana tejże listy na słownik przyspieszyła proces kompilacji kilkukrtonie
+
+							Podczas testów na MacOS napotkałem na problemy. Okazało się że pliki są czytane w innej kolejnosci niż na windowsie, a
+							to ma ogromne znaczenie podczas kompilacji, bo musi być zachowana prawidłowa kolejność parsowania plików,
+							problem wynikał z wildcardów które są wspierane w plikach SRC. Funckja Directory.GetFiles jako jeden z argumentów ma
+							pattern, w którym mozemy podać wildecard, na windowsie gdy mamy sytuacje że nazwa pliku jest prefixem innego pliku,
+							to na posortowanej liście pierwszy będzie plik o dłuższej nazwie, na macOS działa to odwrotnie, pierwszy na liście będzię
+							plik o krótszej nazwie, ten który jest prefixem
+						</aside>
 					</section>
 					<section>
 						<h3>Things about Daedalus discovered during compiler development</h3>
@@ -488,6 +549,21 @@ if ( a > b ) {
 };
 							</code></pre>
 						</li>
+
+						<aside class="notes">
+							Dzięki pracy nad kompilatorem udało nam się dowiedzieć kilka ciekawych rzeczy.
+
+							Obsługa floatów jest bardzo kiepska. De facto to głównie służą jako parametry do różnych rzeczy w silniku.
+							Nie ma na poziomie VM instukcji które pozwalałyby robić porównania floatów, czy też operacji dodawania etc
+
+							Nie jest wymogiem dawanie nawiasów do wyrażeń w blokach warunkowych. Na początku myśleliśmy że jest to jakiś bug
+							oryginlnaego kompilatra że na coś takiego pozwala, ale jak się później okazało to jednak feature ;). De facto
+							tylko w jednym wyrażeniu twórcy gothica pokusili się o taką składnię.
+
+							W gothicu dozwolne jest użycie wyrażenia w którym podajemy samą prawą wartość, w takim przypadku po prostu
+							na stos jest wrzucana zmienna b, i nic wiecej. De facto taki kod nic nie robi, także trochę nie ma sensu,
+							w oryginlnych skryptach gothica jest tylko takie jedno miejsce z takim expression
+						</aside>
 					</section>
 					<section>
 						<h3>What we plan to add ?</h3>
@@ -509,9 +585,6 @@ if ( a > b ) {
 								Possibility to define methods in classes
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Better importing system
-							</li>
-							<li class="fragment fade-in-then-semi-out" style="text-align:left">
 								Add translation string ( feature needed for translation tool )
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
@@ -521,6 +594,30 @@ if ( a > b ) {
 								And ... features suggested by You, community and all Daedalus users ;)
 							</li>
 						</ul>
+
+						<aside class="notes">
+							Planujemy rozszerzyć Daedalus o kilka istotnych funkcji.
+
+							Chcielibyśmy ulepszyć wylrywanie błędów. Obecnie nie robimy analizy typów, co jest must have.
+							Dodatkowo myślimy nad zmianą domyślnej strategi antlr związanej z detekcją błędów podczas
+							parsowania kodu, dzięki czemu moglibyśmy mieć bardziej customową obsługę błędów.
+
+							Dodać booleany. Niestety nie jest to możliwe na poziomie VM, także pod spodem byłyby
+							dalej inty
+
+							Dodać pętle, co ciekawe twórcy nie zdecydowali się na ich dodanie, w niektórych miejscach
+							takowe pętle uprościłyby kod skrytpów
+
+							Możliwość dodawania metod do klas, na dzień obecny można jedynie dodawać pola z wartościami do klas
+
+							Obecnie niektóre teksty ktróre są wyswietlane w grze są trzymane jako literały Daedalusa. Przez to
+							tłumacz musi grzebać w rzeczach abstrakcyjnych dla niego i dodatkowo może popsuć skrypty. Planujemy
+							dodać mechanizm który pozwoli wyciągnać te teksty do zewnętrznych plików
+
+							Planujemy dodać możliwość operacji na floatach, dzięki temu skrypterzy mieliby większe możliwości
+
+							Także wy możecie zadecydować co chcecie zobaczyć w nowym Daedalusie. Jesteśmy otwarci na sugestie
+						</aside>
 					</section>
 				</section>
 				<section class="stack">
@@ -530,18 +627,42 @@ if ( a > b ) {
 						<h3 class="fragment fade-in">Just kidding!</h3>
 						<h3 class="fragment fade-in">Yes, we do!</h3>
 						<h3 class="fragment fade-in">And their helped us!!</h3>
+
+						<aside class="notes">
+							Pewnie się zastanawialiście się czy piszemy testy.
+
+							Po cholere je pisać ...
+
+							Nie no, żart, piszemy testy
+
+							I myślę że warto, mieliśmy sytaucje że robiliśmy refactor, dzięki testom było to o wiele łatwieszje. Mamy też większą
+							pewność że nowe featury nie zepsują obecnie dziajłająych rzeczy. Dodatkowo po dłuższej przerwie z kodem spoglądając na
+							testy, może sobie przypomnieć jak wygląda i działa assembler VM daedalusa
+						</aside>
 					</section>
 					<section>
 						<h3>We write unit tests</h3>
 						<img width="800" class="fragment fade-in" src="unitTest.png">
+						<aside class="notes">
+							W unit testach większość test casów ma kod w stringu Daedalusa oraz oczekiwane instrukcje kodu pośredniego,
+							w teście uruchamiamy kompilator dla tego stringa i sprawdzamy czy instrukcje IR są takie jakie powinny być wygenerowane
+						</aside>
 					</section>
 					<section>
 						<h3>We write e2e tests</h3>
 						<img src="e2eTest.png">
+						<aside class="notes">
+							W testach e2e międzyinnymi porównujemy czy plik DAT stworzony przez oryginalengo gothica jest zgodny
+							z plikiem DAT stworzonym przez nas
+						</aside>
 					</section>
 					<section>
 						<h3>We use CircleCI for automation</h3>
 						<img src="circleci.png">
+						<aside class="notes">
+							Projekt trzymamy na Githubie, dzięki circleCi możemy w bardzo prosty sposób odpalać testy za każdym razem gdy robimy
+							merge, albo wysyłamy kod na dany branch
+						</aside>
 					</section>
 					<section>
 						<h3>Thanks to:</h3>
@@ -550,6 +671,11 @@ if ( a > b ) {
 							<h3>We can run compiler on:</h3>
 							<img width="600" src="OS.png">
 						</div>
+						<aside class="notes">
+							Dzięki temu że kompilator jest pisany w technologii dotnet core możemy uruchomić go na wszystkich znacząych systemach.
+							Wcześniej było to możliwe na windowsie, ponieważ kompilator jest wbudowany w gothic2.exe, a gothic2.exe działa tyko na windowsie,
+							zapominając o tym że jest coś takiego jak wine, uruchomienie na wine wymaga trochę kombinacji
+						</aside>
 					</section>
 				</section>
 				
@@ -558,7 +684,11 @@ if ( a > b ) {
 				</section>
 				
 				<section>
-					<h3>Thank you and Bye</h3>
+					<h3>Thank you and Bye</h3> <br />
+					<h3 class="fragment fade-in">Questions ?</h3>
+					<br /><br />
+					<img width="200" src="ghLogo.png"><br/>
+					<a href="https://github.com/dzieje-khorinis/DaedalusCompiler">github.com/dzieje-khorinis/DaedalusCompiler</a>
 				</section>
 			</div>
 		</div>
@@ -578,10 +708,10 @@ if ( a > b ) {
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-			//
-			// setTimeout(() => {
-            //   Reveal.navigateTo(4)
-			// }, 500);
+
+			setTimeout(() => {
+              Reveal.navigateTo(4)
+			}, 500);
 		</script>
 	</body>
 </html>
