@@ -484,7 +484,7 @@ person.qold = 100;
 						<h4>3. Intermediate representation generation</h4>
 						
 						<div class="fragment fade-in" style="align-items: center; display: flex;">
-						<pre style="width:35%; float:left;"><code data-trim data-noescape style="overflow: hidden;">
+						<pre style="width:32%; float:left;  font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
 func void testFunc() {
   var int x;
 <mark style="background: darkolivegreen;">  x = HLP_Random(100);</mark>
@@ -499,9 +499,9 @@ func void testFunc() {
 <mark style="background: darkcyan;">};</mark>
 			</code></pre>
 			
-			<p style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">🡆</p>
+			<p style="float: left;margin:0;padding: 0; font-size:100%">🡆</p>
 			
-			<pre style="width:52%; float:left; font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
+			<pre style="width:35%; float:left; font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
 <mark style="background: darkolivegreen;">PushInt(100)
 CallExternal(HLP_Random)
 PushVar(testFunc.x)
@@ -510,15 +510,26 @@ Assign()</mark>
 PushVar(testFunc.x)
 GreaterOrEqual()
 JumpIfToLabel("label_0")</mark>
-<mark style="background: brown;">PushVar(y10000)
+<mark style="background: brown;">PushVar(˙10000)
 Call(Print)
 JumpToLabel("label_1")</mark>
 <mark style="background: darkslategrey;">AssemblyLabel("label_0")</mark>
-<mark style="background: saddlebrown;">PushVar(y10001)
+<mark style="background: saddlebrown;">PushVar(˙10001)
 Call(Print)
 AssemblyLabel("label_1")</mark>
 <mark style="background: darkcyan;">Ret()</mark>
 			</code></pre>
+			
+						<pre style="width:25%; float:left; font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
+<mark style="background:rgb(40,40,40);">HLP_Random
+...
+Print</mark>
+testFunc
+testFunc.x
+˙10000 "You win"
+˙10001 "You lose"
+			</code></pre>
+			
 						</div>
 						<aside class="notes">
 							Generowanie formy pośredniej, czyli uzupełnienie struktur w kodzie danymi, z których później w łatwy sposób będzie można wygenerować kod bajtowy.
