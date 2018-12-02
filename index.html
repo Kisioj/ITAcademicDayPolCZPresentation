@@ -340,9 +340,9 @@ func void DIA_MIL_6_STANDARD_Info()
 						<h3>Compilation</h3>
 						<div class="fragment fade-in">
 							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">1. lexical analysis</p>
-							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">2. parsing</p>
-							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">3. semantic analysis</p>
-							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">4. bytecode generation</p>
+							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">2. parsing (syntactic analysis)</p>
+							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">3. semantic analysis, IR generation</p>
+							<p style="text-align:left; margin-bottom: 30px; margin-top: 30px;">4. code generation</p>
 						</div><br>
 
 						<aside class="notes">
@@ -378,52 +378,77 @@ func void DIA_MIL_6_STANDARD_Info()
 					
 					<section data-transition="slide">
 						<h3>1. Lexical analysis</h3>
-						<pre><code data-trim data-noescape style="overflow: hidden;">
-x = 3;
-if (x >= 5) {
-  Print("You win!");
-} else {
-  Print("You lose");
+						<div style="align-items: center; display: flex;">
+						
+						<pre class="fragment fade-in" style="width:35%; float:left;"><code data-trim data-noescape style="overflow: hidden;">
+func void testFunc() {
+  var int x;
+  x = HLP_Random(100);
+  if (x >= 50) {
+    Print("You win!");
+  } else {
+    Print("You lose");
+  };
 };
 			</code></pre>
-			<pre><code data-trim data-noescape style="overflow: hidden;">
-[@0,0:0='x',&lt;IDENTIFIER&gt;,1:0]
-[@1,2:2='=',&lt;'='&gt;,1:2]
-[@2,4:4='3',&lt;INTEGER_LITERAL&gt;,1:4]
-[@3,5:5=';',&lt;';'&gt;,1:5]
-[@4,8:9='if',&lt;'if'&gt;,2:0]
-[@5,11:11='(',&lt;'('&gt;,2:3]
-[@6,12:12='x',&lt;IDENTIFIER&gt;,2:4]
-[@7,14:15='&gt;=',&lt;'&gt;='&gt;,2:6]
-[@8,17:17='5',&lt;INTEGER_LITERAL&gt;,2:9]
-[@9,18:18=')',&lt;')'&gt;,2:10]
-[@10,20:20='{',&lt;'{'&gt;,2:12]
-[@11,24:28='Print',&lt;IDENTIFIER&gt;,3:1]
-[@12,29:29='(',&lt;'('&gt;,3:6]
-[@13,30:39='"You win!"',&lt;STRING_LITERAL&gt;,3:7]
-[@14,40:40=')',&lt;')'&gt;,3:17]
-[@15,41:41=';',&lt;';'&gt;,3:18]
-[@16,44:44='}',&lt;'}'&gt;,4:0]
-[@17,46:49='else',&lt;'else'&gt;,4:2]
-[@18,51:51='{',&lt;'{'&gt;,4:7]
-[@19,55:59='Print',&lt;IDENTIFIER&gt;,5:1]
-[@20,60:60='(',&lt;'('&gt;,5:6]
-[@21,61:70='"You lose"',&lt;STRING_LITERAL&gt;,5:7]
-[@22,71:71=')',&lt;')'&gt;,5:17]
-[@23,72:72=';',&lt;';'&gt;,5:18]
-[@24,75:75='}',&lt;'}'&gt;,6:0]
-[@25,76:76=';',&lt;';'&gt;,6:1]
-[@26,79:78='&lt;EOF&gt;',&lt;EOF&gt;,7:0]
+			
+			<p class="fragment fade-in" style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">🡆</p>
+			
+			<pre class="fragment fade-in" style="width:52%; float:left; font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
+Token('func', &lt;FUNC>&gt;
+Token('void', &lt;VOID>&gt;
+Token('testFunc', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token('{', &lt;OPEN_BRACE>&gt;
+Token('var', &lt;VAR>&gt;
+Token('int', &lt;INT>&gt;
+Token('x', &lt;IDENTIFIER>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('x', &lt;IDENTIFIER>&gt;
+Token('=', &lt;ASSIGN>&gt;
+Token('HLP_Random', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('100', &lt;INTEGER_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('if', &lt;IF>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('x', &lt;IDENTIFIER>&gt;
+Token('>=', &lt;GREATER_THAN_EQUALS>&gt;
+Token('50', &lt;INTEGER_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token('{', &lt;OPEN_BRACE>&gt;
+Token('Print', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('"You win!"', &lt;STRING_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('}', &lt;CLOSE_BRACE>&gt;
+Token('else', &lt;ELSE>&gt;
+Token('{', &lt;OPEN_BRACE>&gt;
+Token('Print', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('"You lose"', &lt;STRING_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('}', &lt;CLOSE_BRACE>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('}', &lt;CLOSE_BRACE>&gt;
+Token(';', &lt;SEMICOLON>&gt;
 			</code></pre>
-						
+			
+			
+						</div>
 						<aside class="notes">
 							Pierwszym krokiem jest analiza leksykalna
 						</aside>
 					</section>
 					
 					<section data-transition="slide">
-						<h3>2. Parsing</h3>
+						<h3>2. Parsing (syntactic analysis)</h3>
 						
+						<img class="fragment fade-in" src="antlr4_parse_tree.png" style="background: white;">
 						
 						<aside class="notes">
 							Kolejnym krokiem jest analiza składniowa (inaczej parsowanie)
@@ -433,10 +458,70 @@ if (x >= 5) {
 					
 					<section data-transition="slide">
 						<h3>3. Semantic analysis</h3>
-						
-						
+						<pre class="fragment fade-in"><code data-trim data-noescape>
+var int random;
+radom = 5;
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape>
+var int num;
+num = "five";
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape>
+var int x;
+var int x;
+						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape>
+var C_NPC person;
+person = HLP_GetNpc(PC_Thief_DI);
+person.qold = 100;
+						</code></pre>
 						<aside class="notes">
 							Kolejnym krokiem jest analiza semantyczna
+						</aside>
+					</section>
+					
+					<section data-transition="slide">
+						<h4>3. Intermediate representation generation</h4>
+						
+						<div class="fragment fade-in" style="align-items: center; display: flex;">
+						<pre style="width:35%; float:left;"><code data-trim data-noescape style="overflow: hidden;">
+func void testFunc() {
+  var int x;
+<mark style="background: darkolivegreen;">  x = HLP_Random(100);</mark>
+<mark style="background: darkslateblue;">  if (x >= 50)</mark>
+<mark style="background: brown;">  {
+    Print("You win!");
+  }</mark>
+<mark style="background: darkslategrey;">  else</mark>
+<mark style="background: saddlebrown;">  {
+    Print("You lose");
+  };</mark>
+<mark style="background: darkcyan;">};</mark>
+			</code></pre>
+			
+			<p style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">🡆</p>
+			
+			<pre style="width:52%; float:left; font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
+<mark style="background: darkolivegreen;">PushInt(100)
+CallExternal(HLP_Random)
+PushVar(testFunc.x)
+Assign()</mark>
+<mark style="background: darkslateblue;">PushInt(50)
+PushVar(testFunc.x)
+GreaterOrEqual()
+JumpIfToLabel("label_0")</mark>
+<mark style="background: brown;">PushVar(y10000)
+Call(Print)
+JumpToLabel("label_1")</mark>
+<mark style="background: darkslategrey;">AssemblyLabel("label_0")</mark>
+<mark style="background: saddlebrown;">PushVar(y10001)
+Call(Print)
+AssemblyLabel("label_1")</mark>
+<mark style="background: darkcyan;">Ret()</mark>
+			</code></pre>
+						</div>
+						<aside class="notes">
+							Generowanie formy pośredniej, czyli uzupełnienie struktur w kodzie danymi, z których później w łatwy sposób będzie można wygenerować kod bajtowy.
 						</aside>
 					</section>
 					

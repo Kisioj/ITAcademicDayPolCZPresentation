@@ -193,6 +193,13 @@ body
 	max-height: unset;
 }
 
+mark {
+	background: inherit;
+    color: inherit;
+    display: inline-block;
+    width: 100%;
+}
+
 /*
 
 #box{
