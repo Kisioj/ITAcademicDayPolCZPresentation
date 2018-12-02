@@ -475,6 +475,9 @@ var C_NPC person;
 person = HLP_GetNpc(PC_Thief_DI);
 person.qold = 100;
 						</code></pre>
+						<pre class="fragment fade-in"><code data-trim data-noescape>
+func int testFunc() {};
+						</code></pre>
 						<aside class="notes">
 							Kolejnym krokiem jest analiza semantyczna
 						</aside>
@@ -511,11 +514,11 @@ PushVar(testFunc.x)
 GreaterOrEqual()
 JumpIfToLabel("label_0")</mark>
 <mark style="background: brown;">PushVar(˙10000)
-Call(Print)
+CallExternal(Print)
 JumpToLabel("label_1")</mark>
 <mark style="background: darkslategrey;">AssemblyLabel("label_0")</mark>
 <mark style="background: saddlebrown;">PushVar(˙10001)
-Call(Print)
+CallExternal(Print)
 AssemblyLabel("label_1")</mark>
 <mark style="background: darkcyan;">Ret()</mark>
 			</code></pre>
@@ -539,11 +542,67 @@ testFunc.x
 					<section data-transition="slide">
 						<h3>4. Code generation</h3>
 						
+						<img class="fragment fade-in-then-disappear" src="hxdhighlight.png">
+						
+						<div class="fragment fade-in" style="align-items: center; display: flex;">
+						<pre style="width:35%; float:left; font-size: 0.50em; margin-left:15%;"><code data-trim data-noescape style="overflow: hidden;">
+PushInt(100)
+CallExternal(HLP_Random)
+PushVar(testFunc.x)
+Assign()
+PushInt(50)
+PushVar(testFunc.x)
+GreaterOrEqual()
+JumpIfToLabel("label_0")
+PushVar(˙10000)
+CallExternal(Print)
+JumpToLabel("label_1")
+AssemblyLabel("label_0")
+PushVar(˙10001)
+CallExternal(Print)
+AssemblyLabel("label_1")
+Ret()
+						</code></pre>
+						<p style="float: left;margin:0;padding: 0; font-size:100%">🡆</p>
+						<pre style="width:35%; float:left; font-size: 0.50em;  margin-right:15%;"><code data-trim data-noescape style="overflow: hidden;">
+40 64 00 00 00
+3E 57 02 00 00
+41 AC 03 00 00
+09
+40 32 00 00 00
+41 AC 03 00 00
+12
+4C 2F 00 00 00
+41 AD 03 00 00
+3E 0C 00 00 00
+4B 39 00 00 00
+
+41 AE 03 00 00
+3E 0C 00 00 00
+
+3C
+						</code></pre>
+						</div>
+						
 						
 						<aside class="notes">
 							Ostatnim krokiem jest wygenerowanie kodu, w naszym przypadku to będzie kod bajtowy dla maszyny wirtualnej Gothica.
 						</aside>
 					</section>
+					
+					<section data-background-transition="slide">
+						<h3>Let's make a compiler</h3><br>
+						<h4 class="fragment fade-in" style="text-align:left;">Q: What do I need?</h3>
+						<h4 class="fragment fade-in" style="text-align:left;">A: ANTLR4!</h3>
+						<br><br>
+						<aside class="notes">
+						</aside>
+					</section>
+					
+
+					
+					
+					
 				</section>
 				
 				<section class="stack">
