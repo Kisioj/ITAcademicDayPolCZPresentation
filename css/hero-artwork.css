@@ -7,6 +7,11 @@
     background-attachment: fixed;
 */
 
+@font-face{
+	font-family: Lusitana;
+	src: url('../rsc/Lusitana/Lusitana-Regular.ttf');
+}
+
 #hero-artwork
 {
     overflow: hidden;
@@ -28,7 +33,7 @@
 
 #hero-artwork > .background
 {
-    background-image: url("../background.jpg");
+    background-image: url("../rsc/background.jpg");
 /*
     background-color: hsla(0, 0%, 50%, 1);
     background-blend-mode: hard-light;
@@ -52,7 +57,7 @@
 
 #hero-artwork > .smoke
 {
-    background-image: url("../smoke.png");
+    background-image: url("../rsc/smoke.png");
     background-size: auto 100%;
     opacity: 0.2;
     background-position: 0vh 0;
@@ -69,7 +74,7 @@
 
 #hero-artwork > .first-plane
 {
-    background-image: url("../first-plane.png");
+    background-image: url("../rsc/first-plane.png");
 }
 
 /*

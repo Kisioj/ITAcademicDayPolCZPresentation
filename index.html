@@ -6,6 +6,8 @@
 
 		<title>C# + Gothic + ANTLR4</title>
 
+		<link href="rsc/Lusitana/Lusitana-Regular.ttf" rel="stylesheet">
+		
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
 
@@ -33,7 +35,7 @@
 			<div class="smoke"></div>
 			<div class="first-plane"></div>
 		</div>
-		<img src="logo-horizontal.png" id="logo" alt="Gothic II Dzieje Khorinis">
+		<img src="rsc/LogoDK.png" id="logo" alt="Gothic II Dzieje Khorinis">
 		
 		<div class="reveal">
 			<div class="slides">
@@ -107,8 +109,8 @@
 					</section>
 					
 					<section data-transition="slide">
-						<img src="logo-horizontal.png" class="logo" style="max-height: 250px;">
-						<img src="dkscreen.jpg" style="max-height: 300px;">
+						<img src="rsc/LogoDK.png" class="logo" style="max-height: 250px;">
+						<img src="rsc/dkscreen.jpg" style="max-height: 300px;">
 						
 						<aside class="notes">
 							KJ: Projekt ten nazywa się Gothic II Dzieje Khorinis. Bardzo możliwe, że już słyszeliście tą nazwę bo jest o nas dość głośno.
@@ -157,7 +159,7 @@
 				<section class="stack">
 					<section data-transition="slide">
 						<h3>Daedalus</h3><br>
-						<img class="fragment fade-in" src="wtfmeme.png" style="max-height: 300px;">
+						<img class="fragment fade-in" src="rsc/wtfmeme.png" style="max-height: 300px;">
 						
 						<aside class="notes">
 							Pytanie do publiczności: czy ktoś z was w ogóle słyszał o takim języku jak Daedalus?
@@ -246,7 +248,7 @@ func void DIA_MIL_6_STANDARD_Info()
 					
 					<section data-transition="slide">
 						<h3>Daedalus Compiler</h3><br>
-						<img class="fragment fade-in" src="butwhy.gif" style="height: 300px; width: 550px; object-fit: cover;">
+						<img class="fragment fade-in" src="rsc/butwhy.gif" style="height: 300px; width: 550px; object-fit: cover;">
 						
 						<aside class="notes">
 							No dobra, wiemy czym jest język Daedalus, ale pytanie brzmi: dlaczego w ogóle chcieliśmy stworzyć nowy kompilator tego języka?
@@ -392,7 +394,7 @@ func void testFunc() {
 };
 			</code></pre>
 			
-			<p class="fragment fade-in" style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">🡆</p>
+			<p class="fragment fade-in" style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">&#129094;</p>
 			
 			<pre class="fragment fade-in" style="width:52%; float:left; font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
 Token('func', &lt;FUNC>&gt;
@@ -448,7 +450,7 @@ Token(';', &lt;SEMICOLON>&gt;
 					<section data-transition="slide">
 						<h3>2. Parsing (syntactic analysis)</h3>
 						
-						<img class="fragment fade-in" src="antlr4_parse_tree.png" style="background: white;">
+						<img class="fragment fade-in" src="rsc/antlr4_parse_tree.png" style="background: white;">
 						
 						<aside class="notes">
 							Kolejnym krokiem jest analiza składniowa (inaczej parsowanie)
@@ -502,7 +504,7 @@ func void testFunc() {
 <mark style="background: darkcyan;">};</mark>
 			</code></pre>
 			
-			<p style="float: left;margin:0;padding: 0; font-size:100%">🡆</p>
+			<p style="float: left;margin:0;padding: 0; font-size:100%">&#129094;</p>
 			
 			<pre style="width:35%; float:left; font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
 <mark style="background: darkolivegreen;">PushInt(100)
@@ -542,7 +544,7 @@ testFunc.x
 					<section data-transition="slide">
 						<h3>4. Code generation</h3>
 						
-						<img class="fragment fade-in-then-disappear" src="hxdhighlight.png">
+						<img class="fragment fade-in-then-disappear" src="rsc/hxdhighlight.png">
 						
 						<div class="fragment fade-in" style="align-items: center; display: flex;">
 						<pre style="width:35%; float:left; font-size: 0.50em; margin-left:18%;"><code data-trim data-noescape style="overflow: hidden;">
@@ -563,7 +565,7 @@ CallExternal(Print)
 AssemblyLabel("label_1")
 Ret()
 						</code></pre>
-						<p style="float: left;margin:0;padding: 0; font-size:100%">🡆</p>
+						<p style="float: left;margin:0;padding: 0; font-size:100%">&#129094;</p>
 						<pre style="width:21%; float:left; font-size: 0.50em;  margin-right:18%;"><code data-trim data-noescape style="overflow: hidden;">
 40 64 00 00 00
 3E 57 02 00 00
@@ -650,7 +652,7 @@ func void testFunc() {
 };
 			</code></pre>
 			
-			<p style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">🡆</p>
+			<p style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">&#129094;</p>
 			
 			<pre style="width:52%; float:left; font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
 Token('func', &lt;FUNC>&gt;
@@ -734,7 +736,7 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 					<section data-transition="slide">
 						<h3>Parsing (syntactic analysis)</h3>
 						
-						<img src="antlr4_parse_tree.png" style="background: white;">
+						<img src="rsc/antlr4_parse_tree.png" style="background: white;">
 						
 						<aside class="notes">
 						</aside>
@@ -805,7 +807,7 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 					</section>
 					<section>
 						<h3>Demo</h3>
-						<img class="fragment fade-in-then-semi-out" src="demo.gif">
+						<img class="fragment fade-in-then-semi-out" src="rsc/demo.gif">
 
 						<aside class="notes">
 							Teraz czas na demo :). Dla pewności zrobiłem nagranie terminala w postaci GIFa. Zobaczmy co na nim jest
@@ -827,7 +829,7 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
 							Problem with INSTANCE_HELP symbol name ( in byte code it's prefixed with fixed char, value of that char is 255  )
-							<br/><br/><img width="400" src="instanceHelpProblem.png">
+							<br/><br/><img width="400" src="rsc/instanceHelpProblem.png">
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
 							Problem with slow compilation speed ( changing List to Dictionary resolved problem  )
@@ -952,7 +954,7 @@ if ( a > b ) {
 				<section class="stack">
 					<section style="font-size: 90%">
 						<h3>Do we write tests ?</h3> <br/>
-						<img class="fragment fade-in" width="500" src="testMeme.jpg"><br/>
+						<img class="fragment fade-in" width="500" src="rsc/testMeme.jpg"><br/>
 						<h3 class="fragment fade-in">Just kidding!</h3>
 						<h3 class="fragment fade-in">Yes, we do!</h3>
 						<h3 class="fragment fade-in">And their helped us!!</h3>
@@ -971,7 +973,7 @@ if ( a > b ) {
 					</section>
 					<section>
 						<h3>We write unit tests</h3>
-						<img width="800" class="fragment fade-in" src="unitTest.png">
+						<img width="800" class="fragment fade-in" src="rsc/unitTest.png">
 						<aside class="notes">
 							W unit testach większość test casów ma kod w stringu Daedalusa oraz oczekiwane instrukcje kodu pośredniego,
 							w teście uruchamiamy kompilator dla tego stringa i sprawdzamy czy instrukcje IR są takie jakie powinny być wygenerowane
@@ -979,7 +981,7 @@ if ( a > b ) {
 					</section>
 					<section>
 						<h3>We write e2e tests</h3>
-						<img src="e2eTest.png">
+						<img src="rsc/e2eTest.png">
 						<aside class="notes">
 							W testach e2e międzyinnymi porównujemy czy plik DAT stworzony przez oryginalengo gothica jest zgodny
 							z plikiem DAT stworzonym przez nas
@@ -987,7 +989,7 @@ if ( a > b ) {
 					</section>
 					<section>
 						<h3>We use CircleCI for automation</h3>
-						<img src="circleci.png">
+						<img src="rsc/circleci.png">
 						<aside class="notes">
 							Projekt trzymamy na Githubie, dzięki circleCi możemy w bardzo prosty sposób odpalać testy za każdym razem gdy robimy
 							merge, albo wysyłamy kod na dany branch
@@ -995,10 +997,10 @@ if ( a > b ) {
 					</section>
 					<section>
 						<h3>Thanks to:</h3>
-						<img width="300" src="dotnetcore.png">
+						<img width="300" src="rsc/dotnetcore.png">
 						<div class="fragment fade-in">
 							<h3>We can run compiler on:</h3>
-							<img width="600" src="OS.png">
+							<img width="600" src="rsc/OS.png">
 						</div>
 						<aside class="notes">
 							Dzięki temu że kompilator jest pisany w technologii dotnet core możemy uruchomić go na wszystkich znacząych systemach.
@@ -1016,7 +1018,7 @@ if ( a > b ) {
 					<h3>Thank you and Bye</h3> <br />
 					<h3 class="fragment fade-in">Questions ?</h3>
 					<br /><br />
-					<img width="200" src="ghLogo.png"><br/>
+					<img width="200" src="rsc/ghLogo.png"><br/>
 					<a href="https://github.com/dzieje-khorinis/DaedalusCompiler">github.com/dzieje-khorinis/DaedalusCompiler</a>
 				</section>
 			</div>
