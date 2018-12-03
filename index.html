@@ -394,7 +394,7 @@ func void testFunc() {
 			
 			<p class="fragment fade-in" style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">🡆</p>
 			
-			<pre class="fragment fade-in" style="width:52%; float:left; font-size: 0.50em;"><code data-trim data-noescape style="overflow: hidden;">
+			<pre class="fragment fade-in" style="width:52%; float:left; font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
 Token('func', &lt;FUNC>&gt;
 Token('void', &lt;VOID>&gt;
 Token('testFunc', &lt;IDENTIFIER>&gt;
@@ -545,7 +545,7 @@ testFunc.x
 						<img class="fragment fade-in-then-disappear" src="hxdhighlight.png">
 						
 						<div class="fragment fade-in" style="align-items: center; display: flex;">
-						<pre style="width:35%; float:left; font-size: 0.50em; margin-left:15%;"><code data-trim data-noescape style="overflow: hidden;">
+						<pre style="width:35%; float:left; font-size: 0.50em; margin-left:18%;"><code data-trim data-noescape style="overflow: hidden;">
 PushInt(100)
 CallExternal(HLP_Random)
 PushVar(testFunc.x)
@@ -564,7 +564,7 @@ AssemblyLabel("label_1")
 Ret()
 						</code></pre>
 						<p style="float: left;margin:0;padding: 0; font-size:100%">🡆</p>
-						<pre style="width:35%; float:left; font-size: 0.50em;  margin-right:15%;"><code data-trim data-noescape style="overflow: hidden;">
+						<pre style="width:21%; float:left; font-size: 0.50em;  margin-right:18%;"><code data-trim data-noescape style="overflow: hidden;">
 40 64 00 00 00
 3E 57 02 00 00
 41 AC 03 00 00
@@ -592,15 +592,189 @@ Ret()
 					
 					<section data-background-transition="slide">
 						<h3>Let's make a compiler</h3><br>
-						<h4 class="fragment fade-in" style="text-align:left;">Q: What do I need?</h3>
-						<h4 class="fragment fade-in" style="text-align:left;">A: ANTLR4!</h3>
+						<h4 class="fragment fade-in" style="text-align:left;"><span style="color:red;">Q:</span> What do I need to start?</h3>
+						<h4 class="fragment fade-in" style="text-align:left;"><span style="color:darkolivegreen;">A:</span> C# + ANTLR4!</h3>
+						<h4 class="fragment fade-in" style="text-align:left;"><span style="color:red;">Q:</span> Ok, done. What now?</h3>
+						<h4 class="fragment fade-in" style="text-align:left;"><span style="color:darkolivegreen;">A:</span> Create lexical and syntactic grammar!</h3>
 						<br><br>
 						<aside class="notes">
 						</aside>
 					</section>
 					
+					<section data-background-transition="slide">
+						<h3>Lexical grammar</h3>
+						<pre class="fragment fade-in" style="width:60%; font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
+IF:              'if';
+FUNC:            'func';
+INT:             'int';
+VAR:             'var';
+VOID:            'void';
+ELSE:            'else';
+<mark style="background:darkred;">OPEN_PAREN:      '(';
+CLOSE_PAREN:     ')';
+OPEN_BRACE:      '{';
+CLOSE_BRACE:     '}';
+SEMICOLON:       ';';</mark>
+INTEGER_LITERAL: [0-9]+;
+STRING_LITERAL:  '"' (~["])* '"';
+IDENTIFIER:      [a-zA-Z_][a-zA-Z0-9_]*;
+<mark style="background:darkred;">ASSIGN:          '=';
+GREATER_EQUAL:   '>=';</mark>
+WHITESPACE:      [ \t]+ -> skip;
+NEWLINE:         ('\r''\n'?| '\n') -> skip;
+						</code></pre>
 
+						<aside class="notes">
+							Dopasowywane są te zasady, które są w stanie dopasować jak najwięcej tekstu z kodu źródłowego.
+							Np. gdyby ktoś chciał nazwać zmienną ifs, no to zostanie z tego stworzony token if, lecz token identifier.
+							
+							W przypadku równej długości dopasowania kolejność jest ważna, jeżeli np. IDENTIFIER byłby nad IFem to nigdy token if by nie wystąpił.
+							bo wyrazęnie if (cośtam) by generowało IDENTIFIER.
+						</aside>
+					</section>
 					
+					
+					<section data-transition="slide">
+						<h3>Lexical analysis</h3>
+						<div style="align-items: center; display: flex;">
+						
+						<pre style="width:35%; float:left;"><code data-trim data-noescape style="overflow: hidden;">
+func void testFunc() {
+  var int x;
+  x = HLP_Random(100);
+  if (x >= 50) {
+    Print("You win!");
+  } else {
+    Print("You lose");
+  };
+};
+			</code></pre>
+			
+			<p style="float: left;margin-left: 2%;margin-right: 1%;padding: 0; font-size:200%">🡆</p>
+			
+			<pre style="width:52%; float:left; font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
+Token('func', &lt;FUNC>&gt;
+Token('void', &lt;VOID>&gt;
+Token('testFunc', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token('{', &lt;OPEN_BRACE>&gt;
+Token('var', &lt;VAR>&gt;
+Token('int', &lt;INT>&gt;
+Token('x', &lt;IDENTIFIER>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('x', &lt;IDENTIFIER>&gt;
+Token('=', &lt;ASSIGN>&gt;
+Token('HLP_Random', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('100', &lt;INTEGER_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('if', &lt;IF>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('x', &lt;IDENTIFIER>&gt;
+Token('>=', &lt;GREATER_THAN_EQUALS>&gt;
+Token('50', &lt;INTEGER_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token('{', &lt;OPEN_BRACE>&gt;
+Token('Print', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('"You win!"', &lt;STRING_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('}', &lt;CLOSE_BRACE>&gt;
+Token('else', &lt;ELSE>&gt;
+Token('{', &lt;OPEN_BRACE>&gt;
+Token('Print', &lt;IDENTIFIER>&gt;
+Token('(', &lt;OPEN_PAREN>&gt;
+Token('"You lose"', &lt;STRING_LITERAL>&gt;
+Token(')', &lt;CLOSE_PAREN>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('}', &lt;CLOSE_BRACE>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+Token('}', &lt;CLOSE_BRACE>&gt;
+Token(';', &lt;SEMICOLON>&gt;
+			</code></pre>
+			
+			
+						</div>
+						<aside class="notes">
+
+						</aside>
+					</section>
+					
+					
+					<section data-background-transition="slide">
+						<h3>Syntactic grammar</h3>
+						<pre class="fragment fade-in" style="font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
+main: functionDef* EOF;
+
+functionDef: FUNC VOID IDENTIFIER '(' ')' block ';';
+block: '{' statement* '}';
+statement: (assignment | varDecl | functionCall | ifStatement) ';' ;
+
+assignment: IDENTIFIER '=' expression;
+varDecl: VAR INT IDENTIFIER;
+functionCall: IDENTIFIER '(' expression ')';
+
+ifStatement: IF ifCondition block (ELSE block)?;
+ifCondition: '(' expression ')';
+
+expression: expression '>=' expression | functionCall | value;
+
+value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
+						</code></pre>
+
+						<aside class="notes">
+
+						</aside>
+					</section>
+					
+					
+					<section data-transition="slide">
+						<h3>Parsing (syntactic analysis)</h3>
+						
+						<img src="antlr4_parse_tree.png" style="background: white;">
+						
+						<aside class="notes">
+						</aside>
+					</section>
+					
+					
+					<section data-background-transition="slide">
+						<h4>Grammar file: Daedalus.g4</h4>
+						<pre class="fragment fade-in" style="width: 70%; font-size: 0.32em;"><code data-trim data-noescape style="overflow: hidden;">
+grammar Daedalus
+
+IF:              'if';
+FUNC:            'func';
+INT:             'int';
+VAR:             'var';
+VOID:            'void';
+ELSE:            'else';
+INTEGER_LITERAL: [0-9]+;
+STRING_LITERAL:  '"' (~["])* '"';
+IDENTIFIER:      [a-zA-Z_][a-zA-Z0-9_]*;
+WHITESPACE:      [ \t]+ -> skip;
+NEWLINE:         ('\r''\n'?| '\n') -> skip;
+
+main: functionDef* EOF;
+functionDef: FUNC VOID IDENTIFIER '(' ')' block ';';
+block: '{' statement* '}';
+statement: (assignment | varDecl | functionCall | ifStatement) ';' ;
+assignment: IDENTIFIER '=' expression;
+varDecl: VAR INT IDENTIFIER;
+functionCall: IDENTIFIER '(' expression ')';
+ifStatement: IF ifCondition block (ELSE block)?;
+ifCondition: '(' expression ')';
+expression: expression '>=' expression | functionCall | value;
+value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
+						</code></pre>
+
+						<aside class="notes">
+
+						</aside>
+					</section>
 					
 					
 				</section>
