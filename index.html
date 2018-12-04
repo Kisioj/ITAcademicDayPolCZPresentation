@@ -803,7 +803,7 @@ Token(';', &lt;SEMICOLON>&gt;
 			
 						</div>
 						<aside class="notes">
-
+							W ramach przypomninia to ta gramatya jest po to, żeby wygenerować Lexer, który dzięki zdefiniowanym w gramatyce tokenom, będzie w stanie zamienić kod źródłowy na strumień tokenów.
 						</aside>
 					</section>
 					
@@ -898,7 +898,11 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 						</code></pre>
 
 						<aside class="notes">
-
+							Generalnie obie nasze gramatyki powinny znajdować się w jednym pliku z rozszerzeniem g4, który według konwencji powinien mieć nazwę taką jak nasz język.
+							
+							Zawartość pliku wygląda w taki sposób, że najpierw piszemy linijkę, która musi być czyli grammar Deadalus, gdzie Daealus to jest nazwa naszego języka, a następnie w naszym pliku umieszczamy gramatyke leksykalną i składniową.
+							
+							Mając utworzony ten plik z gramatyką jesteśmy w stanie przejść do następnego kroku tworzenia kompilatora.
 						</aside>
 					</section>
 
@@ -918,7 +922,19 @@ DaedalusLexer.cs</span>
 						</code></pre>
 
 						<aside class="notes">
-
+							Następnym krokiem jest wygenrowanie Lexera, Parsera oraz Listenera, o którym jeszcze nie wspominałem, a którego wykorzystanie będzie dla nas kluczowe.
+							
+							Jak wygenerować te rzeczy?
+							Ano najlepiej przez konsolę.
+							
+							Musimy znajdować się w katalogu, w ktorym znajduje się nasza gramatyka.
+							A następnie wykonujemy polecenie antlr4 dla naszej gramatyki, podając dodatkowo do programu informajce, że kod, który wygeneruje ma być kodem w języku C#.
+							
+							Po wykonaniu komeny widzimy, że pod spodem wykonuje się jakiś program Javowy.
+							
+							Po wykonaniu, które trwa błyskawicznie, możemy sprawdzić co znajduje się w katalogu i okaże się, że doszło nam trochę nowych plików.
+							
+							Pliki, które nas insteresują to DaedalusLexer.cs, który zawiera Lexer naszego języka. DaedalusParser.cs, który zawiera Parser naszego języka, oraz DaedalusBaseListener, który zawiera Listener, o którym zaraz powiem.
 						</aside>
 					</section>
 					
