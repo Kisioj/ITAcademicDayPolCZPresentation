@@ -5,8 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<title>C# + Gothic + ANTLR4</title>
-
-		<link href="rsc/Lusitana/Lusitana-Regular.ttf" rel="stylesheet">
 		
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -314,16 +312,16 @@ func void DIA_MIL_6_STANDARD_Info()
 						<p class="fragment fade-in">A compiler is computer software that transforms computer code written in one programming language (the source language) into another programming language (the target language).</p>
 						
 						<aside class="notes">
-							A więc pozwólcie, że przedstawie wam definicje z angielskiej wikipedii, która mówi, że kompilator to jest program, który zamienia kod napisany w jednym języku programowania na kod w innym języku programowania.
+							Zacznijmy od tego, czy jest kompilator. 
 							
-							Zazwyczaj jednak jak mówimy o kompilatorze  to mamy na myśli coś w stylu kompilatora np. języka C, czyli chodzi nam o program, który zamienia kod źródłowy na kod maszynowy, czyli instrukcje zrozumiałe dla procesora naszego komputera,
+							Pozwólcie, że przedstawie wam definicje z angielskiej wikipedii, która mówi, że kompilator to jest program, który zamienia kod napisany w jednym języku programowania na kod w innym języku programowania. Kod źródłowy na kod docelowy.
+							
+							Zazwyczaj jak mówimy o kompilatorze  to mamy na myśli coś w stylu kompilatora np. języka C, czyli chodzi nam o program, który zamienia kod źródłowy na kod maszynowy, czyli instrukcje zrozumiałe dla procesora naszego komputera,
 
-							albo często też chodzi nam o program, który zamienia kod źródłowy na kod bajtowy, który potem jest wykonywany przez maszynę wirtualną i tak jest np. w przypadku np. Javy albo właśnie języka Daedalus.
+							albo czasmi chodzi nam o program, który zamienia kod źródłowy na kod bajtowy, który potem jest może być wykonany przez maszynę wirtualną i tak jest np. w przypadku np. Javy albo właśnie języka Daedalus.
 						</aside>
 					</section>
 					
-					
-
 					
 					
 					
@@ -331,9 +329,17 @@ func void DIA_MIL_6_STANDARD_Info()
 						<h3>How does the compiler work?</h3>
 						
 						<aside class="notes">
-							No dobra, ale jak kompilator działa pod spodem? Otóż należy zacząć od tego, że kompilator to taki program, który jak sama nazwa wskazuje, potrafi wykonać proces kompilacji jakiegoś kodu źródłowego - czyli ten proces zamiany kodu źródłowego na kod zrozumiały przez procesor lub maszynę wirtualna.
+							No dobra, ale jak kompilator działa pod spodem? Otóż należy zacząć od tego, że kompilator to taki program, który jak sama nazwa wskazuje, potrafi wykonać proces kompilacji, który składa się z 4 głównych kroków.
 							
-							Proces kompilacji składa się z kilku głównych kroków. Kroków tych może być więcej, lub mniej, w zależności od kompilatora, natomiast podstawowe kroki, które wykorzystujemy w naszym kompilatorze są następujące:
+							Pierwszym krokiem jest analiza leksykalna,
+							Następnie mamy Parsowanie, czyli analizę syntaktyczą.
+							Następnie odbywa się analiza semantyczna i mniej więcej w tym samym czasie również odbywa się generowanie pormy pośredniej, czyli Intermediate Representation generation
+							i na koniec mamy generowanie kodu.
+							
+							W niektórych źródłach odnośnie kompilatorów możecie znaleźć mniej lub więcej kroków procesu kompilacji, często można znaleźć informacje o tym, że przed analizą leksykalną występuje też tkz. preprocesing. Czyli jeżeli ktoś pisał np. w C albo w C++ to tam te linie, które zaczynają się od # np. #include, albo #define one są właśnie wykonywane przez preprocesor przed krokiem
+							analizy leksykalnej.
+							
+							Można by też do tego procesu kompilacji dołożyć ewentualnie optymalizacje kodu, który odbywa się zazwyczaj po wygenerowaniu formy pośredniej.
 						</aside>
 					</section>
 					
@@ -443,7 +449,15 @@ Token(';', &lt;SEMICOLON>&gt;
 			
 						</div>
 						<aside class="notes">
-							Pierwszym krokiem jest analiza leksykalna
+							No dobra, przejdźmy do pierwszego kroku, czyli analizy leksykalnej, która jest wykonywana przez część kompilatora o nazwie Lexer, nazywany czasem też Skanerem.
+							
+							Generalnie to działa tak, że Lexer dostaje na wejściu kod źródłowy i zamienia go na strumień Tokenów.
+							Widzimy, że każde słowo kluczowe, nawiasy, czy średniki, liczby w zasadzie wszystko, zamieniane jest na tokeny.
+							
+							W tym przykładzie widzimy, że np. słowa func, później void, później testFunc zostały zamienione na tokeny, ale np.
+							białe znaki, czyli spacje, albo znaki nowej linii zostały zignorowane i nie zostały z nich utworzone tokeny.
+							
+							Dlaczego? Ano dlatego, że Lexer został stworzony właśnie w taki sposób aby je ignorować.
 						</aside>
 					</section>
 					
@@ -453,8 +467,17 @@ Token(';', &lt;SEMICOLON>&gt;
 						<img class="fragment fade-in" src="rsc/antlr4_parse_tree.png" style="background: white;">
 						
 						<aside class="notes">
-							Kolejnym krokiem jest analiza składniowa (inaczej parsowanie)
-						</aside>
+							Kolejnym krokiem kompilacji jest Analiza składniowa nazywana parsowaniem, która jest wykonywana przez Parser.
+							
+							W tym kroku Parser dostaje od Lexera strumień tokenów, analizuje je, i wg. ustalonych ściśle zasad, generuje
+							z nich jakąś strukturę danych, zazwyczaj bedzie to drzewo składniowe, z angielskiego Abstract Syntax Tree, AST.
+							
+							Na takim drzewie bardzo fajnie widać strukturę kodu źródłowego, widać które tokeny składają się na deklaracje zmiennej, które na instukcje przypisania, a które na instrukcje warunkową.  
+
+							I do tego w dość prosty, bo przechodząc po prostu po tym drzewie, można można z niego wyciągnąć wszelkie informacje potrzebne w dalszych krokach kompilacji.
+							
+							Warto dodać, że wszelkie błędy składniowe, które pewnie nie raz wam wyskakują podczas kompilowania swoich programów są wykrywane podczas Analizy składniowej. Błędy składniowe czyli oczywiście syntax errors po angielsku.
+							</aside>
 					</section>
 					
 					
@@ -473,15 +496,32 @@ var int x;
 var int x;
 						</code></pre>
 						<pre class="fragment fade-in"><code data-trim data-noescape>
-var C_NPC person;
-person = HLP_GetNpc(PC_Thief_DI);
-person.qold = 100;
+object.nonExistingAttribute = 100;
 						</code></pre>
 						<pre class="fragment fade-in"><code data-trim data-noescape>
 func int testFunc() {};
 						</code></pre>
 						<aside class="notes">
-							Kolejnym krokiem jest analiza semantyczna
+							No dobra, kolejnym krokiem kompilacji jest analiza semantyczna.
+							której zadaniem jest wykrywanie błędów semantycznych zwanych inaczej błędami znaczeniowymi.
+							
+							Są to takie błędy, o których nie można jednoznacznie stwierdzić, czy to są błędy
+							czy nie, dopóki nie pozna się pełnego kontekstu.
+							
+							Przykład, jeżeli zobaczylibyśmy tylko linie radom = 5, no to nie jesteśmy w stanie stwierdzić,
+							czy w tej linii jest błąd czy go nie ma. Ta linia wydaje się całkowicie poprawna.
+							Ale, jeżeli spojrzymy na linijke wcześniej, to się okaże,że ta zmienna, do której przypisujemy
+							wartość to się nie powinna nazywać radom, lecz random, więc mamy tutaj błąd semantyczny.
+							
+							Kolejnym przykładem takiego błędu jest przypadek, gdy próbujemy do zmiennej o jednym
+							typie wpisać wartość innego typu.
+							
+							Albo np. kiedy 2 razy zadeklarujemy zmienną o tej samej nazwie.
+							
+							Lub np. w przypadku, gdy odwołamy się do jakiegoś nieistniejącego atrybutu obiektu.
+							
+							Albo kiedy funkcja powinna zwracać wartość jakiegoś typu, np. liczbowego, a nie zwraca nic.
+							
 						</aside>
 					</section>
 					
@@ -537,7 +577,25 @@ testFunc.x
 			
 						</div>
 						<aside class="notes">
-							Generowanie formy pośredniej, czyli uzupełnienie struktur w kodzie danymi, z których później w łatwy sposób będzie można wygenerować kod bajtowy.
+							No dobra, przejdźmy dalej.
+							
+							Mniej więcej w tym samym czasie, w którym odbywa się analiza semantyczna, wykonywane jest też generowanie formy pośredniej.
+							
+							Polega to na wyciągnięciu danych z drzewa składniowego i zapisanie ich w odpowiednich strukturach w naszym programie, aby później w łatwy sposób można było wygenerować kod bajtowy.
+							
+							Ok, Chciałbym wam teraz zaprezentować wam jak wygląda u nas w kompilatorze ta forma pośrednia, i w jaki sposób ma się do niej kod źródłowy.
+							
+							Po lewej stronie mamy kod źródłowy, a po prawej mamy naszą formę pośrednią.
+							Nasza forma pośrednia składa się w zasadzie na 2 listy. Pierwsza lista 
+							jest to lista obiektów reprezentujących instrukcje asemblera Daedalusowego.
+							I kolorami tutaj oznaczyłem, linie w kodzie źródłowym oraz odpowiadające im instrukcje.
+							
+							Widać np. że, linjka x = HLP_Random(100); zamienia się na 4 instrukcje, gdzi najpierw wrzucamy
+							na stos wartość 100, następnie wywołujemy funkcję zewnętrzną HLP_Random, poźniej na stos wrzucamy zmienną X oraz wykonujemy instrukcje przypisania.
+							
+							Oprócz listy instrukcji, nasza forma pośrednia zawiera również listę symboli, czyli wszystkich klas, funkcji, zmiennych, stałych i tak dalej. Oprócz naszych własnych symboli na tej liście znajduje się też masa symboli reprezentujących funkcje zewnętrzne języka takie jak np. HLP_Random albo Print.
+							
+							Byćmoże ktoś z was zauważył albo i nie, ale z literałów napisów, czyli tych stringów w podwójnych apostrofach, również generowane są u nas symbole, których nazwa zaczyna się od kolejno od 10000 i idzie w górę, a zrobiliśmy to po prostu na wzór oryginalnego kompilatora Gothicowego. 
 						</aside>
 					</section>
 					
@@ -588,7 +646,16 @@ Ret()
 						
 						
 						<aside class="notes">
-							Ostatnim krokiem jest wygenerowanie kodu, w naszym przypadku to będzie kod bajtowy dla maszyny wirtualnej Gothica.
+							Ostatnim krokiem jest wygenerowanie kodu, w naszym przypadku to będzie kod bajtowy dla maszyny wirtualnej Gothica. A tak będąc dosłownym to wynikiem tej kompilacji jest plik o nazwie gothic.dat który zawiera w sobie informacje o wzystkich symbolach oraz kod bajtowy.
+							
+							Ja te plik sobie wygenerowałem i później otworzyłem hex edytorem, aby podejrzeć
+							poszczególne bajty. I tutaj mamy screen z tego hex edytora, widzimy po prawej stronie, zaznaczyłem nazwy symboli oraz wartości tekstowe, które pochodzą z kodu źródłowego, natomiast po lewej stronie zaznaczyłem wartości 40 i 3C i są to odpowiednio, początek oraz koniec wygenerowanego kodu bajtowego, który jest de facto kodem naszej funkcji.
+							
+							Z czego wygenerowaliśmy ten kod bajtowy? Ano listy instrukcji zawartej w naszej formie pośredniej. Tutaj również widać, że pierwszy bajt to 40, a ostani bajt to 3C.
+							
+							Fajnie też widać, że pierwszy bajt w każdym wierszu po prawej stronie to po prostu kod instrukcji, oczywiście w formacie szesnastkowym. Dla przykładu: instrukcja PushInt generuje kod 40 szesnastkowo, argument tej instrukcji, czyli wartość 100 jest później zapisana na kolejnych 4 bajtach. Wartość 100 w systemie dziesiętnym to jest właśnie wartość 64 w systemie szesnastkowym.
+							
+							
 						</aside>
 					</section>
 					
@@ -600,12 +667,19 @@ Ret()
 						<h4 class="fragment fade-in" style="text-align:left;"><span style="color:darkolivegreen;">A:</span> Create lexical and syntactic grammar!</h3>
 						<br><br>
 						<aside class="notes">
+						No dobra, jakieś podstawy procesu kompilacji już mamy, więc możemy spróbować zrobić kompilator.
+						Pytanie czego potrzebujemy na początek?
+						Możemy użyć różnych narzędzi, ale użyjemy narzędzi z tytułu prezentacji czyli powinniśmy zainstalować C#
+						oraz narzędzie ANTLR4, napisane w Javie, więc Java też bedzie nam potrzebna, przynajmniej przez chwilę.
+						No dobra, założmy, że to już mamy, i pytanie co teraz?
+						Jaki jest pierwszy krok?
+						Ano musimy stworzyć plik z gramatyką. W tym pliku bedzie znajdować się gramatyka leksykalna oraz gramatyka syntaktyczna, o których zaraz powiem.
 						</aside>
 					</section>
 					
 					<section data-background-transition="slide">
 						<h3>Lexical grammar</h3>
-						<pre class="fragment fade-in" style="width:60%; font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
+						<pre class="fragment fade-in" style="width:60%; font-size: 0.45em;"><code class="html" data-trim data-noescape style="overflow: hidden;">
 IF:              'if';
 FUNC:            'func';
 INT:             'int';
@@ -627,11 +701,39 @@ NEWLINE:         ('\r''\n'?| '\n') -> skip;
 						</code></pre>
 
 						<aside class="notes">
+							Zacznijmy od gramatyki leksykalnej.
+							Pytanie co to jest gramatyka leksykalna?
+							
+							Otóż jest to zbiór definicji TOKENów, o których już wcześniej wspominałem,
+							gdy mówiłem o Lexerze, czyli części kompilatora zamieniającej kod źródłowy
+							na strumień tokenów.
+							
+							Można powiedzieć też, że gramatyka leksykalna to jest swego rodzaju słownik naszego języka,
+							ponieważ wymienione są w niej wszystkie słowa, które mogą w naszym języku wystąpić.
+							
+							W jaki sposób definiujemy tokeny?
+							Ano najpierw piszemy nazwe tokenu, a po dwukropku piszemy tekst, lub wyrażenie regularne, któremu
+							on odpowiada. Co to, że tekst odpowiada TOKENowi? Ano to, że jeżeli w kodzie źródłowym wystąpi taki tekst 
+							lub tekst, który pasuje do zapisanego wyrażenia reglarnego to zostanie wygenerowany ten TOKEN.
+							
+							Widzimy, że ja na początku zdefiniowałem sobie słowa kluczowe.
+							Potem nawiasy, średnik, liczbe całkowitą, napis, następnie identyfikator,
+							który będzie używany jako nazwa dla klas, funkcji, zmiennych i tego typu rzeczy.
+							
+							Później zdefiniowałem sobie operatory.
+							
+							A na końcu białe znaki i znaki nowej linii,
+							które onaczyłem, że chciałbym skipować, czyli ignorować.
+							
+							
+							/*
+							O TYM POWIEM INNYM RAZEM JAK BĘDZIE WIĘCEJ CZASU:
 							Dopasowywane są te zasady, które są w stanie dopasować jak najwięcej tekstu z kodu źródłowego.
 							Np. gdyby ktoś chciał nazwać zmienną ifs, no to zostanie z tego stworzony token if, lecz token identifier.
 							
 							W przypadku równej długości dopasowania kolejność jest ważna, jeżeli np. IDENTIFIER byłby nad IFem to nigdy token if by nie wystąpił.
 							bo wyrazęnie if (cośtam) by generowało IDENTIFIER.
+							*/
 						</aside>
 					</section>
 					
@@ -708,18 +810,18 @@ Token(';', &lt;SEMICOLON>&gt;
 					
 					<section data-background-transition="slide">
 						<h3>Syntactic grammar</h3>
-						<pre class="fragment fade-in" style="font-size: 0.45em;"><code data-trim data-noescape style="overflow: hidden;">
+						<pre class="fragment fade-in" style="font-size: 0.45em;"><code class="html" data-trim data-noescape style="overflow: hidden;">
 main: functionDef* EOF;
 
 functionDef: FUNC VOID IDENTIFIER '(' ')' block ';';
 block: '{' statement* '}';
-statement: (assignment | varDecl | functionCall | ifStatement) ';' ;
+statement: (assignment | varDecl | functionCall | ifStatement) ';';
 
 assignment: IDENTIFIER '=' expression;
 varDecl: VAR INT IDENTIFIER;
 functionCall: IDENTIFIER '(' expression ')';
 
-ifStatement: IF ifCondition block (ELSE block)?;
+ifStatement: IF ifCondition block (ELSE block)? ';';
 ifCondition: '(' expression ')';
 
 expression: expression '>=' expression | functionCall | value;
@@ -728,7 +830,28 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 						</code></pre>
 
 						<aside class="notes">
-
+							No dobra, pytanie czym jest gramatyka syntaktyczna?
+							
+							W skrócie można powiedzieć, że jest to zbiór zasad opisujących strukturę naszego języka.
+							
+							Czyli inaczej można powiedzieć, że tej gramatyce piszemy zasady, które określają w jaki sposób ma wyglądać składnia naszego języka,
+							jak mają być zapisywane definicje funkcji, wyrażenia warunkowe, pętle, jak ma wyglądać deklaracja zmiennych i inne tego typu rzeczy.
+							Również rzeczy typu czy bloki kodu mają być wyznaczone klamrami, czy może wcięciami jak w Pythonie, a może jeszcze inaczej?
+							
+							
+							Zapis wygląda w taki sposób, że najpierw piszemy nazwę zasady, a po dwukropku jej opis.
+							Jeżeli chodzi o nazwy tych zasad to są one dowolne, to my decydujemy jak się będą nazywać.
+							
+							Opis zasady może zawierać odwołania do TOKENów oraz do innych zasad.
+							Można też odwoływać się do tokenów nie po nazwie, lecz po dopasowaniu.
+							Robimy to za pomocą umieszczenia napisu w pojedynczych apostrofach.
+							I wtedy to działa tak fajnie, że de facto nie musimy mieć zdefiniowanych tych tokenów
+							bo one zostaną automatycznie wygenerowane przez ANTLR4.
+							
+							Możemy też tutaj korzystać z kwantyfikatorów wyrażeń regularnych takich jak:
+							* - oznaczająca 0 lub więcej wystąpień wyrażenia poprzedzającego
+							+ - 1 lub więcej wystąpień
+							? - opcjonalność (0 lub 1 wystąpienie)
 						</aside>
 					</section>
 					
@@ -739,13 +862,14 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 						<img src="rsc/antlr4_parse_tree.png" style="background: white;">
 						
 						<aside class="notes">
+						W ramach przypomninia to ta gramatya jest po to, żeby wygenerować parser, który według ściśle określonych regół będzie wstanie zamienić strumień tokenów na drzewo składniowe.
 						</aside>
 					</section>
 					
 					
 					<section data-background-transition="slide">
-						<h4>Grammar file: Daedalus.g4</h4>
-						<pre class="fragment fade-in" style="width: 70%; font-size: 0.32em;"><code data-trim data-noescape style="overflow: hidden;">
+						<h4>Daedalus.g4</h4>
+						<pre class="fragment fade-in" style="width: 70%; font-size: 0.32em;"><code class="html" data-trim data-noescape style="overflow: hidden;">
 grammar Daedalus
 
 IF:              'if';
@@ -767,7 +891,7 @@ statement: (assignment | varDecl | functionCall | ifStatement) ';' ;
 assignment: IDENTIFIER '=' expression;
 varDecl: VAR INT IDENTIFIER;
 functionCall: IDENTIFIER '(' expression ')';
-ifStatement: IF ifCondition block (ELSE block)?;
+ifStatement: IF ifCondition block (ELSE block)? ';';
 ifCondition: '(' expression ')';
 expression: expression '>=' expression | functionCall | value;
 value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
@@ -777,7 +901,26 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 
 						</aside>
 					</section>
-					
+
+					<section data-background-transition="slide">
+						<h4>Generate Lexer, Parser and Listener</h4>
+						<pre class="fragment fade-in"><code class="nohighlight" data-trim data-noescape style="overflow: hidden; background:black;">
+<span class="fragment fade-in">λ ls</span>
+<span class="fragment fade-in">Daedalus.g4</span>
+<span class="fragment fade-in">λ antlr4 -Dlanguage=CSharp Daedalus.g4</span>
+<span class="fragment fade-in">java org.antlr.v4.Tool -Dlanguage=CSharp Daedalus.g4</span>
+<span class="fragment fade-in">λ ls</span>
+<span class="fragment fade-in">Daedalus.g4              DaedalusLexer.interp
+Daedalus.interp          DaedalusLexer.tokens
+Daedalus.tokens          DaedalusListener.cs
+DaedalusBaseListener.cs  DaedalusParser.cs
+DaedalusLexer.cs</span>
+						</code></pre>
+
+						<aside class="notes">
+
+						</aside>
+					</section>
 					
 				</section>
 				
