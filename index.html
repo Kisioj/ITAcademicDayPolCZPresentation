@@ -53,7 +53,7 @@
 					<section data-transition="zoom">
 						<h2 style="text-align:left">About us</h2><br>
 
-						<h4 class="fragment fade-in" style="text-align:left">Artur Kasperek</h4>
+						<h4 class="fragment fade-in" style="text-align:left">Artur Kasperek &lt;<a href="arturmiks@gmail.com" target="_top">arturmiks@gmail.com</a>&gt;</h4>
 						
 						<div class="sl-block" data-block-type="text">
 							<div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; line-height: 1.95;" data-has-line-height="">
@@ -989,13 +989,13 @@ private void ParseFile(string filePath) {
 				
 				<section class="stack">
 					<section>
-						<h3>What our compiler can do for now moment ?</h3>
+						<h3>What our compiler can do now ?</h3>
 						<ul>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Load SRC file</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Compile Daedalus code and generate DAT file</li>
-							<li class="fragment fade-in-then-semi-out" style="text-align:left">Detect errors with default ANTLR error strategy</li>
-							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate CSL files ( Gothic Engine Dialog file )</li>
-							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate readable assembler (WIP)</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">Handle syntax errors (ANTLR4)</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate OU files (Gothic Engine Dialog file)</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate readable assembly</li>
 						</ul>
 
 						<aside class="notes">
@@ -1031,14 +1031,14 @@ private void ParseFile(string filePath) {
 					<section style="font-size: 80%">
 						<h3>Some interesting problems during development</h3>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							Problem with encoding ( Gothic Script were written originally written in windows 1250 encoding  )
+							Gothic Scripts were originally written in Windows 1250 encoding
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							Problem with INSTANCE_HELP symbol name ( in byte code it's prefixed with fixed char, value of that char is 255  )
+							INSTANCE_HELP symbol name ( in byte code it's prefixed with fixed char, value of that char is 255  )
 							<br/><br/><img width="400" src="rsc/instanceHelpProblem.png">
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							Problem with slow compilation speed ( changing List to Dictionary resolved problem  )
+							Slow compilation speed ( changing List to Dictionary resolved problem  )
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
 							dotNet Directory.GetFiles method by default works differently on different OS
@@ -1067,12 +1067,12 @@ private void ParseFile(string filePath) {
 						</aside>
 					</section>
 					<section>
-						<h3>Things about Daedalus discovered during compiler development</h3>
+						<h3>What we learnt about Daedalus ?</h3>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
 							Operation on floats are limited
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							Statement of IF block does't have to be surrounded with brackets, ex:
+							If conditions doesn't need parenthesises
 							<pre><code data-trim data-noescape>
 if 5 < 2 {
 };
@@ -1103,7 +1103,7 @@ if ( a > b ) {
 						</aside>
 					</section>
 					<section>
-						<h3>What we plan to add ?</h3>
+						<h3>What next ? (part 1)</h3>
 						<ul>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
 								Better error handling
@@ -1113,19 +1113,67 @@ if ( a > b ) {
 								</ul>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Add booleans ( software support )
+								Booleans (software support)
+								<pre><code data-trim data-noescape>
+var bool x;
+							</code></pre>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Add loops (for, while, foreach)
+								Loops (for, while, foreach)
+								<pre><code data-trim data-noescape>
+for ( var int x = 0 ; x < 10; x++ ) {}
+							</code></pre>
+							</li>
+						</ul>
+
+						<aside class="notes">
+							Planujemy rozszerzyć Daedalus o kilka istotnych funkcji.
+
+							Chcielibyśmy ulepszyć wylrywanie błędów. Obecnie nie robimy analizy typów, co jest must have.
+							Dodatkowo myślimy nad zmianą domyślnej strategi antlr związanej z detekcją błędów podczas
+							parsowania kodu, dzięki czemu moglibyśmy mieć bardziej customową obsługę błędów.
+
+							Dodać booleany. Niestety nie jest to możliwe na poziomie VM, także pod spodem byłyby
+							dalej inty
+
+							Dodać pętle, co ciekawe twórcy nie zdecydowali się na ich dodanie, w niektórych miejscach
+							takowe pętle uprościłyby kod skrytpów
+
+							Możliwość dodawania metod do klas, na dzień obecny można jedynie dodawać pola z wartościami do klas
+
+							Obecnie niektóre teksty ktróre są wyswietlane w grze są trzymane jako literały Daedalusa. Przez to
+							tłumacz musi grzebać w rzeczach abstrakcyjnych dla niego i dodatkowo może popsuć skrypty. Planujemy
+							dodać mechanizm który pozwoli wyciągnać te teksty do zewnętrznych plików
+
+							Planujemy dodać możliwość operacji na floatach, dzięki temu skrypterzy mieliby większe możliwości
+
+							Także wy możecie zadecydować co chcecie zobaczyć w nowym Daedalusie. Jesteśmy otwarci na sugestie
+						</aside>
+					</section>
+					<section>
+						<h3>What next ? (part 2)</h3>
+						<ul>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Possibility to define methods in classes
+								Methods
+								<pre><code data-trim data-noescape>
+CLASS Hero
+{
+  func void goToTown() {}
+};
+							</code></pre>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Add translation string ( feature needed for translation tool )
+								Translation string
+								<pre><code data-trim data-noescape>
+var string x = T"{SOME_ID}";
+							</code></pre>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Add operations on float ( software support )
+								Add operations on float (software support)
+								<pre><code data-trim data-noescape>
+var float x = 2.4 + 2.1;
+							</code></pre>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
 								And ... features suggested by You, community and all Daedalus users ;)
@@ -1163,7 +1211,7 @@ if ( a > b ) {
 						<img class="fragment fade-in" width="500" src="rsc/testMeme.jpg"><br/>
 						<h3 class="fragment fade-in">Just kidding!</h3>
 						<h3 class="fragment fade-in">Yes, we do!</h3>
-						<h3 class="fragment fade-in">And their helped us!!</h3>
+						<h3 class="fragment fade-in">And they helped us!!</h3>
 
 						<aside class="notes">
 							Pewnie się zastanawialiście się czy piszemy testy.
@@ -1217,7 +1265,7 @@ if ( a > b ) {
 				</section>
 				
 				<section>
-					<h3>We need C# programmers</h3>
+					<h3>We need programmers</h3>
 				</section>
 				
 				<section>
