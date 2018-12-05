@@ -989,12 +989,12 @@ private void ParseFile(string filePath) {
 				
 				<section class="stack">
 					<section>
-						<h3>What our compiler can do now ?</h3>
+						<h3>What can our compiler do?</h3>
 						<ul>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Load SRC file</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Compile Daedalus code and generate DAT file</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Handle syntax errors (ANTLR4)</li>
-							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate OU files (Gothic Engine Dialog file)</li>
+							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate OU files (Gothic Engine Dialog files)</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">Generate readable assembly</li>
 						</ul>
 
@@ -1034,11 +1034,11 @@ private void ParseFile(string filePath) {
 							Gothic Scripts were originally written in Windows 1250 encoding
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							INSTANCE_HELP symbol name ( in byte code it's prefixed with fixed char, value of that char is 255  )
+							INSTANCE_HELP symbol name (in byte code it's prefixed with fixed char, value of that char is 255)
 							<br/><br/><img width="400" src="rsc/instanceHelpProblem.png">
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							Slow compilation speed ( changing List to Dictionary resolved problem  )
+							Slow compilation (changing List to Dictionary resolved problem)
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
 							dotNet Directory.GetFiles method by default works differently on different OS
@@ -1067,12 +1067,12 @@ private void ParseFile(string filePath) {
 						</aside>
 					</section>
 					<section>
-						<h3>What we learnt about Daedalus ?</h3>
+						<h3>Things we learned about Daedalus</h3>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
 							Operation on floats are limited
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							If conditions doesn't need parenthesises
+							If conditions doesn't need parentheses
 							<pre><code data-trim data-noescape>
 if 5 < 2 {
 };
@@ -1103,7 +1103,7 @@ if ( a > b ) {
 						</aside>
 					</section>
 					<section>
-						<h3>What next ? (part 1)</h3>
+						<h3>What next? (part 1)</h3>
 						<ul>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
 								Better error handling
@@ -1151,7 +1151,7 @@ for ( var int x = 0 ; x < 10; x++ ) {}
 						</aside>
 					</section>
 					<section>
-						<h3>What next ? (part 2)</h3>
+						<h3>What next? (part 2)</h3>
 						<ul>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
@@ -1164,19 +1164,19 @@ CLASS Hero
 							</code></pre>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Translation string
+								Translation strings
 								<pre><code data-trim data-noescape>
 var string x = T"{SOME_ID}";
 							</code></pre>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								Add operations on float (software support)
+								Operations on floats (software support)
 								<pre><code data-trim data-noescape>
 var float x = 2.4 + 2.1;
 							</code></pre>
 							</li>
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
-								And ... features suggested by You, community and all Daedalus users ;)
+								Features suggested by You, community and all Daedalus programmers ;)
 							</li>
 						</ul>
 
@@ -1207,7 +1207,7 @@ var float x = 2.4 + 2.1;
 				</section>
 				<section class="stack">
 					<section style="font-size: 90%">
-						<h3>Do we write tests ?</h3> <br/>
+						<h3>Do we write tests?</h3> <br/>
 						<img class="fragment fade-in" width="500" src="rsc/testMeme.jpg"><br/>
 						<h3 class="fragment fade-in">Just kidding!</h3>
 						<h3 class="fragment fade-in">Yes, we do!</h3>
@@ -1270,7 +1270,7 @@ var float x = 2.4 + 2.1;
 				
 				<section>
 					<h3>Thank you and Bye</h3> <br />
-					<h3 class="fragment fade-in">Questions ?</h3>
+					<h3 class="fragment fade-in">Questions?</h3>
 					<br /><br />
 					<img width="200" src="rsc/ghLogo.png"><br/>
 					<a href="https://github.com/dzieje-khorinis/DaedalusCompiler">github.com/dzieje-khorinis/DaedalusCompiler</a>
