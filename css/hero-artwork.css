@@ -12,6 +12,11 @@
 	src: url('../rsc/Lusitana/Lusitana-Regular.ttf');
 }
 
+@font-face{
+	font-family: Consolas;
+	src: url('../rsc/Consolas/CONSOLA.TTF');
+}
+
 #hero-artwork
 {
     overflow: hidden;

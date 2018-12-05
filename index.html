@@ -464,8 +464,9 @@ Token(';', &lt;SEMICOLON>&gt;
 					<section data-transition="slide">
 						<h3>2. Parsing (syntactic analysis)</h3>
 						
+						<!--<canvas class="fragment fade-in" id="canvas" width="1100" height="600" style="background: white; max-height: 400px;"></canvas>-->
 						<img class="fragment fade-in" src="rsc/antlr4_parse_tree.png" style="background: white;">
-						
+					
 						<aside class="notes">
 							Kolejnym krokiem kompilacji jest Analiza składniowa nazywana parsowaniem, która jest wykonywana przez Parser.
 							
@@ -907,7 +908,7 @@ value: INTEGER_LITERAL | STRING_LITERAL | IDENTIFIER;
 					</section>
 
 					<section data-background-transition="slide">
-						<h4>Generate Lexer, Parser and Listener</h4>
+						<h4>Generate Lexer and Parser</h4>
 						<pre class="fragment fade-in"><code class="nohighlight" data-trim data-noescape style="overflow: hidden; background:black;">
 <span class="fragment fade-in">λ ls</span>
 <span class="fragment fade-in">Daedalus.g4</span>
@@ -935,6 +936,53 @@ DaedalusLexer.cs</span>
 							Po wykonaniu, które trwa błyskawicznie, możemy sprawdzić co znajduje się w katalogu i okaże się, że doszło nam trochę nowych plików.
 							
 							Pliki, które nas insteresują to DaedalusLexer.cs, który zawiera Lexer naszego języka. DaedalusParser.cs, który zawiera Parser naszego języka, oraz DaedalusBaseListener, który zawiera Listener, o którym zaraz powiem.
+						</aside>
+					</section>
+					
+					
+					<section data-background-transition="slide">
+						<h4>Example Code</h4>
+						<pre class="fragment fade-in" style="width: 70%; font-size: 0.32em;"><code class="csharp" data-trim data-noescape style="overflow: hidden;">
+private void ParseFile(string filePath) {
+  string fileContent = GetFileContent(filePath);
+  AntlrInputStream inputStream = new AntlrInputStream(fileContent);
+  DaedalusLexer lexer = new DaedalusLexer(inputStream);
+  CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
+  DaedalusParser parser = new DaedalusParser(commonTokenStream);
+  DaedalusListener listener = new DaedalusListener();
+  ParseTreeWalker.Default.Walk(listener, parser.main());
+}
+						</code></pre>
+
+						<aside class="notes">
+						</aside>
+					</section>
+					
+					
+					<section data-transition="slide">
+						<h3>DaedalusBaseListener</h3>
+						
+						<img class="fragment fade-in" src="rsc/DaedalusBaseListener.png" style="background: white;">
+					
+						<aside class="notes">
+						</aside>
+					</section>
+					
+					<section data-transition="slide">
+						<h3>ParseTreeWalker</h3>
+						
+						<canvas class="fragment fade-in" id="canvas" width="1100" height="600" style="background: white; max-height: 400px;"></canvas>
+					
+						<aside class="notes">
+						</aside>
+					</section>
+					
+					<section data-transition="slide">
+						<h3>Usage of Enter & Exit methods</h3>
+						
+						<img class="fragment fade-in" src="rsc/OurListenerCode.PNG" style="background: white;">
+					
+						<aside class="notes">
 						</aside>
 					</section>
 					
@@ -1185,7 +1233,9 @@ if ( a > b ) {
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-
+				
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/tree.js"></script>
 		<script>
 			// More info about config & dependencies:
 			// - https://github.com/hakimel/reveal.js#configuration
