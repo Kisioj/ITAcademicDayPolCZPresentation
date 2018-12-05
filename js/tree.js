@@ -49,6 +49,22 @@ $(document).ready(function() {
 			return;
 		}
 		
+		console.log("event.which", event.which);
+		if (event.which == 27) {
+			
+			
+			
+			if (activeElement) {
+				refreshTree();
+				activeElement = null;
+			} else {
+				refreshTree();
+			}
+			
+			drawTree();
+			return false;
+		};
+		
 	
 		if (!activeElement) {
 			console.log("early return");
@@ -119,6 +135,7 @@ $(document).ready(function() {
 
 
 	function drawTree() {	
+		console.log("drawTree");
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		var stack = [];
@@ -228,6 +245,24 @@ $(document).ready(function() {
 					ctx.font = "16px sans-serif";
 				}
 				child.width = ctx.measureText(child.text).width;
+				stack.push(child);
+			}
+		}
+	}
+	
+	
+	function refreshTree() {
+		activeElement = treeRoot;
+
+		var stack = [];
+		stack.push(treeRoot);
+		
+		while (stack.length > 0) {
+			var label = stack.pop();
+			label.status = NOT_VISITED;
+
+			for(var i=0; i<label.children.length; i++) {
+				var child = label.children[i];
 				stack.push(child);
 			}
 		}
