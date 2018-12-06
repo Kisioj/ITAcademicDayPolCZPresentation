@@ -1072,14 +1072,14 @@ private void ParseFile(string filePath) {
 							Operation on floats are limited
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							If conditions doesn't need parentheses
+							If condition doesn't need parentheses
 							<pre><code data-trim data-noescape>
 if 5 < 2 {
 };
 							</code></pre>
 						</li>
 						<li class="fragment fade-in-then-semi-out" style="text-align:left">
-							Gothic Compiler support expression without assigment
+							Gothic Compiler supports expression without assigment
 							<pre><code data-trim data-noescape>
 if ( a > b ) {
   b;
@@ -1108,7 +1108,7 @@ if ( a > b ) {
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
 								Better error handling
 								<ul>
-									<li>Lexical errors</li>
+									<li>Syntax errors</li>
 									<li>Semantic errors</li>
 								</ul>
 							</li>
@@ -1157,7 +1157,7 @@ for ( var int x = 0 ; x < 10; x++ ) {}
 							<li class="fragment fade-in-then-semi-out" style="text-align:left">
 								Methods
 								<pre><code data-trim data-noescape>
-CLASS Hero
+class Hero
 {
   func void goToTown() {}
 };
